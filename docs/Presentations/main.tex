@@ -1,0 +1,147 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=black,
+}
+
+\titleformat{\section}{\large\bfseries\color{blue!60!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{blue!50!black}}{\thesubsection}{1em}{}
+
+\title{
+    \vspace{-1cm}
+    \Large \textbf{Engenharia de Controle e Automação} \\
+    \vspace{1cm}
+    \Huge \textbf{Proposta de Projeto Integrado} \\
+    \vspace{0.5cm}
+    \LARGE \textcolor{blue!60!black}{Sistema Automatizado de Limpeza e Arrefecimento de Painéis Fotovoltaicos (ASCM)}
+}
+\author{\textbf{} César Kerber\\ Lucas Ekroth\\ Paulo Rangel}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\vspace{1.5cm}
+
+\begin{abstract}
+\noindent A eficiência de sistemas solares fotovoltaicos é frequentemente comprometida pelo acúmulo de poeira e aumento da temperatura nas células. Esta proposta apresenta o projeto de um sistema automatizado para a limpeza e arrefecimento de painéis fotovoltaicos, embasado no estado da arte atual. O sistema visa monitorar as condições do painel e do ambiente para realizar a limpeza e o resfriamento de forma autônoma, visando maximizar a geração de energia e prolongar a vida útil dos módulos, com foco em baixo custo e viabilidade econômica.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introdução e Problematização}
+
+A motivação para o desenvolvimento deste sistema fundamenta-se no crescimento exponencial da energia solar fotovoltaica como pilar da transição energética global. De acordo com relatórios da \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, o avanço das fontes renováveis é notável: no Brasil, a combinação das energias solar e eólica já responde por aproximadamente um terço da geração elétrica nacional \cite{ember_brazil_2024}. Na União Europeia, essas fontes já atingiram a marca de 30\% da matriz \cite{ember_eu_2026}, refletindo uma tendência mundial de expansão da capacidade instalada e a necessidade crítica de manter esses ativos operando em sua eficiência máxima.
+
+A energia solar fotovoltaica tem se destacado como uma das principais fontes de energia renovável. No entanto, a eficiência dos sistemas fotovoltaicos (PV) é severamente comprometida pelo fenômeno do \textit{soiling} (acúmulo de poeira, detritos e poluentes). Conforme reportado por Qi et al. (2025) \cite{qi2025}, o acúmulo de poeira pode reduzir a eficiência em até \textbf{7,84\% por semana} em determinadas regiões, podendo chegar a perdas totais superiores a \textbf{50\%} em períodos de seca prolongada.
+
+Além do sombreamento físico, que impede a radiação solar de atingir a célula, o acúmulo de sujeira contribui para o aumento da temperatura de operação das células. Geetha et al. (2024) \cite{geetha2024} destacam que para cada grau Celsius acima da temperatura ideal (geralmente 25$^\circ$C), a eficiência do módulo decresce entre \textbf{0,5\% e 0,6\%}. Portanto, um sistema eficaz não deve apenas focar na remoção de sujidades, mas também auxiliar na regulação térmica dos painéis solares para garantir a máxima eficiência.
+
+\section{Estado da Arte e Revisão Bibliográfica}
+
+\subsection{Mecanismos de Limpeza}
+A literatura atual classifica os métodos de limpeza em ativos e passivos. O estado da arte aponta para:
+\begin{itemize}
+    \item \textbf{Sistemas de Aspersão e Rodo (Wiper):} Utilizam bicos nebulizadores combinados com braços mecânicos acionados por motores. O estudo empírico de Geetha et al. (2024) \cite{geetha2024} demonstrou um aumento de \textbf{14,81\%} na eficiência de saída utilizando este método em um sistema \textit{Automatic Self-Cleaning Mechanism (ASCM)} controlado por Arduino, provando ser uma solução de baixo custo e alta eficácia.
+    \item \textbf{Limpeza Robótica:} Robôs autônomos que percorrem as fileiras de painéis utilizando escovas rotativas. Embora eficazes e capazes de atuar sem água em alguns casos, apresentam alto custo de implementação, manutenção complexa e desafios de navegação entre módulos (Qi et al., 2025) \cite{qi2025}.
+    \item \textbf{Revestimentos Super-hidrofóbicos:} Métodos passivos que utilizam nanotecnologia, como filmes nano-revestidos (ex: dióxido de titânio), para repelir água e poeira, reduzindo a adesão das partículas via forças de Van der Waals (Qi et al., 2025) \cite{qi2025}. Apesar de inovadores, ainda possuem custo elevado e durabilidade limitada sob condições severas.
+\end{itemize}
+
+\subsection{Fenômeno de \textit{Dust Scaling}}
+Pesquisas recentes (Qi et al., 2025) \cite{qi2025} revelam que a umidade relativa (entre 40\% e 80\%) facilita a formação de "pontes líquidas" de capilaridade entre as partículas de poeira e a superfície do vidro. Após a evaporação (como o orvalho matinal), minerais solúveis cristalizam-se formando uma crosta rígida e aderente (\textit{hard scale}). Isso justifica fortemente a necessidade de uma limpeza não apenas mecânica, mas com uso otimizado de água para dissolver essa camada, e reforça a importância de limpezas frequentes antes que a poeira se consolide na superfície do painel.
+
+\subsection{Gestão Hídrica e Sustentabilidade}
+A viabilidade ambiental do projeto em larga escala depende do uso racional da água. Cavalcante et al. (2016) \cite{cavalcante2016} propuseram em seu protótipo sistemas de \textbf{reaproveitamento da água da chuva} e da própria água de limpeza, utilizando filtros físicos para retenção de particulados graúdos e finos antes do retorno ao reservatório principal. Este conceito é fundamental para reduzir o custo operacional e o impacto ambiental do sistema automático.
+
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+Desenvolver um protótipo de sistema automatizado de baixo custo para limpeza e arrefecimento térmico de painéis solares, integrando sensoriamento inteligente em tempo real e conceitos de gestão hídrica sustentável.
+
+\subsection{Objetivos Específicos}
+\begin{itemize}
+    \item Implementar lógica de controle baseada na \textbf{comparação diferencial de potência} (corrente/tensão) entre um Painel de Referência (mantido limpo) e o Painel Principal.
+    \item Integrar sensores de temperatura da superfície do painel, sensor de chuva e sensor de umidade para otimizar os gatilhos dos ciclos de limpeza e acionar o arrefecimento (\textit{cooling}) de forma inteligente.
+    \item Desenvolver e modelar um mecanismo eletromecânico de varredura (rodo motorizado) impulsionado por motores DC ou de passo.
+    \item Projetar um sistema de aspersão de água que minimize o desperdício, dimensionando bomba e bicos de forma eficiente.
+\end{itemize}
+
+\section{Metodologia Proposta}
+
+\subsection{Arquitetura e Hardware do Sistema}
+O controle do sistema será centralizado em um microcontrolador da família \textbf{ESP32} ou \textbf{Arduino Uno}, escolhidos pelo balanço entre custo, bibliotecas disponíveis e capacidade de integração.
+\begin{itemize}
+    \item \textbf{Sensoriamento:} Módulos de sensor de corrente (ex: INA219 ou ACS712) para monitorar a performance elétrica em tempo real. Um sensor de temperatura (ex: termopar impermeável DS18B20) para acionar o arrefecimento, e um sensor de chuva para impedir limpezas desnecessárias.
+    \item \textbf{Atuadores:} Motores com caixa de redução (\textit{Geared DC Motors}) acionados por pontes H (ex: L298N) ou Motores de Passo (NEMA 17) para movimento linear suave do rodo sobre trilhos de alumínio. Uma mini-bomba d'água DC de 12V será responsável pelo envio de água ao sistema de aspersão.
+\end{itemize}
+
+\subsection{Estratégia de Controle}
+A estratégia de acionamento seguirá os seguintes limiares:
+\begin{enumerate}
+    \item \textbf{Gatilho por Sujeira:} Se a diferença de potência medida $\Delta P = (P_{referencia} - P_{atual})$ for maior que o limite configurado (ex: queda de 10-15\% na corrente esperada), o ciclo de aspersão e raspagem mecânica é iniciado.
+    \item \textbf{Gatilho por Temperatura:} Se a temperatura do painel $T_{painel} > 45^\circ\text{C}$ (ajustável), o sistema aciona brevemente a bomba para criar uma lâmina de água sobre o módulo, induzindo resfriamento evaporativo.
+\end{enumerate}
+
+\subsection{Custos Estimados e Desenvolvimento Físico}
+Baseado nos modelos da literatura, a montagem do protótipo focará em itens comerciais de prateleira (COTS). O custo estimado para o desenvolvimento do protótipo funcional em escala reduzida está na faixa de \textbf{R\$ 450,00 a R\$ 800,00}, utilizando estruturas como perfis de alumínio e peças em impressão 3D.
+
+\section{Resultados Esperados}
+\begin{itemize}
+    \item \textbf{Ganho de Eficiência Elétrica:} Recuperação e manutenção de cerca de \textbf{15\% a 20\%} da energia que seria perdida devido ao acúmulo de poeira.
+    \item \textbf{Mitigação Térmica:} Redução da temperatura de operação em até \textbf{5$^\circ$C a 10$^\circ$C} durante picos de calor irradiante.
+    \item \textbf{Viabilidade:} Demonstração prática de que o custo da automação implantada se paga rapidamente devido à energia excedente gerada ao longo do ano.
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{thebibliography}{99}
+
+\bibitem{ember_eu_2026}
+EMBER.
+\textit{European Electricity Review 2026}.
+Disponível em: \url{https://ember-energy.org/latest-insights/european-electricity-review-2026/}. Acesso em: 24 mar. 2026.
+
+\bibitem{ember_brazil_2024}
+EMBER.
+\textit{Wind and solar generate over a third of Brazil's electricity for the first month on record}.
+Disponível em: \url{https://ember-energy.org/latest-insights/wind-and-solar-generate-over-a-third-of-brazils-electricity-for-the-first-month-on-record/}. Acesso em: 24 mar. 2026.
+
+\bibitem{geetha2024}
+GEETHA, A.; USHA, S.; SANTHAKUMAR, J.; PALANISAMY, R.; SARAWAGI, R.; SINGH, A. 
+\textit{Solar Panel Self-Cleaning Mechanisms and Its Effect on the Economic and Environmental Sustainability}. 
+\textbf{Journal of Electrical and Computer Engineering}, Hindawi, vol. 2024, Article ID 7726716, 2024.
+
+\bibitem{qi2025}
+QI, Jiacheng; DONG, Qichang; SONG, Ye; ZHAO, Xiaoqing; SHI, Long.
+\textit{Combining dust scaling behaviors of PV panels and water cleaning methods}. 
+\textbf{Renewable and Sustainable Energy Reviews}, Elsevier, vol. 212, 115394, 2025.
+
+\bibitem{cavalcante2016}
+CAVALCANTE, M. M.; MARCELINO, J. E. C.; DELGADO, D. B. M.; VIANA, E. C.
+\textit{Protótipo de um sistema automatizado para higienização de painéis solares planos agrupado a um sistema de reaproveitamento de água}. 
+In: \textbf{Anais do V SINGEP}, São Paulo – SP, Brasil, 2016.
+
+\end{thebibliography}
+
+\end{document}
