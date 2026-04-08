@@ -8,13 +8,15 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "streamlit",
-    "telemetrix4arduino",
+    "telemetrix",
     "pandas",
     "requests",
     "pydantic",
-]w
+]
 
 [tool.uv]
 dev-dependencies = [
+    "pyright>=1.1.408",
     "pytest",
+    "ruff>=0.15.9",
 ]

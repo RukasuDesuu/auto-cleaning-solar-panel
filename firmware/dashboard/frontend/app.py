@@ -30,7 +30,8 @@ try:
     # Em produção, o backend proveria isso
     # weather_info = requests.get("http://localhost:8000/weather").json()
     pass
-except: pass
+except Exception:
+    pass
 
 c1, c2, c3 = st.columns(3)
 c1.metric("Temp. Ambiente (API)", f"{weather_info['ambient_temp']} °C")

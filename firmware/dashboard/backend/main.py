@@ -1,7 +1,6 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI
 from .hardware import HardwareManager
 from .services.weather import WeatherService
-import uvicorn
 import asyncio
 
 app = FastAPI(title="ASCM Backend Smart API")
