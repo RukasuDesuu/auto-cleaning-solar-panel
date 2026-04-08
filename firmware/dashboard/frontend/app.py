@@ -1,7 +1,6 @@
 import streamlit as st
 import requests
 import pandas as pd
-import time
 
 st.set_page_config(page_title="ASCM Smart Dashboard", layout="wide", page_icon="🌤️")
 
@@ -22,14 +21,14 @@ if st.sidebar.button("Salvar Configurações"):
     try:
         requests.post("http://localhost:8000/config/update", json=new_cfg, timeout=1)
         st.sidebar.success("Configurações aplicadas!")
-    except:
+    except Exception:
         st.sidebar.error("Erro ao salvar config.")
 
 # Coleta de dados reais para a Sidebar
 try:
     resp = requests.get("http://localhost:8000/telemetry", timeout=1)
     telemetry = resp.json()
-except:
+except Exception:
     telemetry = {
         "limit_home": 1,
         "limit_end": 1,
