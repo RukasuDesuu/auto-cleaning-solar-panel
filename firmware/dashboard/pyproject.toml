@@ -1,0 +1,20 @@
+[project]
+name = "ascm-dashboard"
+version = "0.1.0"
+description = "Dashboard para monitoramento e controle do sistema ASCM"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "streamlit",
+    "telemetrix4arduino",
+    "pandas",
+    "requests",
+    "pydantic",
+]w
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+]
