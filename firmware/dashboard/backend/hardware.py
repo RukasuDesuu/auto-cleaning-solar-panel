@@ -1,31 +1,32 @@
 from telemetrix import telemetrix
 
+
 class HardwareManager:
     def __init__(self):
         # Inicializa a conexão com o Arduino
         # Em produção, você pode passar parâmetros como o port serial
         self.board = telemetrix.Telemetrix()
-        
+
         # --- Pinos Atuadores ---
         self.PUMP_PIN = 6
         self.MOTOR_IN1 = 9
         self.MOTOR_IN2 = 10
         self.MOTOR_ENA = 11
-        
+
         # --- Pinos Sensores ---
         self.LIMIT_HOME = 2
         self.LIMIT_END = 3
-        self.LDR_PIN = 0     # A0
-        self.TEMP_PIN = 1    # A1
-        
+        self.LDR_PIN = 0  # A0
+        self.TEMP_PIN = 1  # A1
+
         # Estado dos sensores (Cache atualizado via callbacks)
         self.state = {
-            "limit_home": 1, # 1 = Solto (Pull-up)
+            "limit_home": 1,  # 1 = Solto (Pull-up)
             "limit_end": 1,
             "lux": 0,
-            "temperature": 0.0
+            "temperature": 0.0,
         }
-        
+
         self._setup_pins()
 
     def _setup_pins(self):
@@ -34,15 +35,19 @@ class HardwareManager:
         self.board.set_pin_mode_digital_output(self.MOTOR_IN1)
         self.board.set_pin_mode_digital_output(self.MOTOR_IN2)
         self.board.set_pin_mode_analog_output(self.MOTOR_ENA)
-        
+
         # Sensores Digitais com Callback
-        self.board.set_pin_mode_digital_input_pullup(self.LIMIT_HOME, callback=self._limit_home_cb)
-        self.board.set_pin_mode_digital_input_pullup(self.LIMIT_END, callback=self._limit_end_cb)
-        
+        self.board.set_pin_mode_digital_input_pullup(
+            self.LIMIT_HOME, callback=self._limit_home_cb
+        )
+        self.board.set_pin_mode_digital_input_pullup(
+            self.LIMIT_END, callback=self._limit_end_cb
+        )
+
         # Sensores Analógicos com Callback
         self.board.set_pin_mode_analog_input(self.LDR_PIN, callback=self._ldr_cb)
         self.board.set_pin_mode_analog_input(self.TEMP_PIN, callback=self._temp_cb)
-        
+
         # I2C
         self.board.set_pin_mode_i2c()
 
@@ -90,7 +95,7 @@ class HardwareManager:
     def get_all_sensors(self):
         # Placeholder para o INA219 (seria via I2C read)
         return {
-            "panel_main": {"power": 45.0}, # Mock
+            "panel_main": {"power": 45.0},  # Mock
             "panel_ref": {"power": 50.0},  # Mock
-            **self.state
+            **self.state,
         }
