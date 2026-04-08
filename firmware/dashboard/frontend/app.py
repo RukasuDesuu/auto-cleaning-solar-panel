@@ -1,10 +1,11 @@
 import streamlit as st
 import requests
 import pandas as pd
+import time
 
 st.set_page_config(page_title="ASCM Smart Dashboard", layout="wide", page_icon="🌤️")
 
-# --- SIDEBAR: CONFIGURAÇÕES SMART ---
+# --- SIDEBAR: CONFIGURAÇÕES E STATUS ---
 st.sidebar.title("⚙️ Configurações Smart")
 city = st.sidebar.text_input("Localização (Cidade)", "Sao Paulo")
 eff_limit = st.sidebar.slider("Limiar de Sujeira (%)", 5, 30, 10)
@@ -13,30 +14,36 @@ auto_on = st.sidebar.toggle("Automação Ativa", True)
 
 if st.sidebar.button("Salvar Configurações"):
     new_cfg = {
-        "city": city,
-        "efficiency_threshold": float(eff_limit),
-        "temp_delta_limit": float(temp_limit),
-        "automation_enabled": auto_on
+        "city": city, "efficiency_threshold": float(eff_limit),
+        "temp_delta_limit": float(temp_limit), "automation_enabled": auto_on
     }
-    requests.post("http://localhost:8000/config/update", json=new_cfg)
-    st.sidebar.success("Configurações aplicadas!")
+    try:
+        requests.post("http://localhost:8000/config/update", json=new_cfg, timeout=1)
+        st.sidebar.success("Configurações aplicadas!")
+    except:
+        st.sidebar.error("Erro ao salvar config.")
 
-# --- CABEÇALHO COM CLIMA EXTERNO ---
-st.title("🌤️ ASCM Smart Monitoring")
-
-# Mock de dados de clima para o frontend
-weather_info = {"ambient_temp": 28.5, "desc": "Céu Limpo", "rain": "Não"}
+# Coleta de dados reais para a Sidebar
 try:
-    # Em produção, o backend proveria isso
-    # weather_info = requests.get("http://localhost:8000/weather").json()
-    pass
-except Exception:
-    pass
+    resp = requests.get("http://localhost:8000/telemetry", timeout=1)
+    telemetry = resp.json()
+except:
+    telemetry = {"limit_home": 1, "limit_end": 1, "temperature": 0, "lux": 0, "panel_main": {"power": 0}, "panel_ref": {"power": 0}}
 
+st.sidebar.divider()
+st.sidebar.header("📡 Status do Hardware")
+home_status = "🏠 HOME (Ativado)" if telemetry["limit_home"] == 0 else "⚪ Aberto"
+end_status = "🏁 END (Ativado)" if telemetry["limit_end"] == 0 else "⚪ Aberto"
+st.sidebar.info(f"Fim de Curso Início: {home_status}")
+st.sidebar.info(f"Fim de Curso Final: {end_status}")
+
+# --- CABEÇALHO ---
+st.title("🌤️ ASCM Smart Monitoring")
 c1, c2, c3 = st.columns(3)
-c1.metric("Temp. Ambiente (API)", f"{weather_info['ambient_temp']} °C")
-c2.metric("Previsão", weather_info['desc'])
-c3.metric("Chuva Próxima?", weather_info['rain'])
+# Simulação de clima (pode ser expandido no backend)
+c1.metric("Temperatura Painel", f"{telemetry['temperature']} °C")
+c2.metric("Luminosidade", f"{telemetry['lux']} LDR")
+c3.metric("Bomba/Rodo", "Ativo" if auto_on else "Manual")
 
 st.divider()
 
@@ -44,26 +51,30 @@ st.divider()
 st.subheader("📊 Comparativo de Geração")
 col_p1, col_p2, col_p3 = st.columns(3)
 
-# Dados mockados para ilustrar o cálculo de eficiência
-p_main = 45.2 # Watts
-p_ref = 52.8  # Watts
-perda = ((p_ref - p_main) / p_ref) * 100
+p_main = telemetry["panel_main"]["power"]
+p_ref = telemetry["panel_ref"]["power"]
+perda = ((p_ref - p_main) / p_ref * 100) if p_ref > 0 else 0
 
 col_p1.metric("Painel Principal", f"{p_main} W")
 col_p2.metric("Painel Referência", f"{p_ref} W")
-col_p3.metric("Perda por Soiling", f"{perda:.1f}%", delta=f"{perda-5:.1f}%", delta_color="inverse")
+col_p3.metric("Perda por Soiling", f"{perda:.1f}%", delta=f"{perda-eff_limit:.1f}%", delta_color="inverse")
 
 if perda > eff_limit:
     st.warning(f"⚠️ Alerta: Perda de eficiência acima do limite de {eff_limit}%! Limpeza necessária.")
 
-# --- GRÁFICOS ---
-st.markdown("### Histórico de Eficiência vs Clima")
-chart_data = pd.DataFrame({
-    'Eficiência (%)': [98, 95, 92, 88, 85],
-    'Temp. Painel (°C)': [26, 30, 35, 42, 45],
-    'Temp. Ambiente (°C)': [25, 26, 27, 28, 28]
-})
-st.line_chart(chart_data)
+# --- CONTROLES MANUAIS ---
+st.subheader("🚀 Comandos Manuais")
+cm1, cm2, cm3, cm4 = st.columns(4)
+if cm1.button("🧼 Ciclo Completo"): requests.post("http://localhost:8000/cycle/clean")
+if cm2.button("❄️ Arrefecer"): requests.post("http://localhost:8000/cycle/cool")
+if cm3.button("🏠 Ir para Home"): requests.post("http://localhost:8000/actuators/motor?direction=backward")
+if cm4.button("🛑 PARAR TUDO", type="primary"): requests.post("http://localhost:8000/stop")
 
 st.divider()
-st.info("💡 Dica: O sistema economiza água cancelando ciclos de limpeza se a API detectar chuva iminente.")
+# --- GRÁFICOS ---
+st.markdown("### Histórico de Performance")
+chart_data = pd.DataFrame({
+    'Painel Principal': [18.1, 18.2, 18.5, 18.4, 18.5],
+    'Painel Referência': [19.0, 19.1, 19.2, 19.1, 19.3]
+})
+st.line_chart(chart_data)
