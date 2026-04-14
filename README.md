@@ -26,6 +26,8 @@ A eficiência de um painel solar é severamente afetada por fatores externos:
 Com base na arquitetura definida para o protótipo:
 
 ### Eletrônica e Controle
+Para detalhes de montagem, pinagem e lista completa de componentes, consulte o [Guia de Hardware Eletrônico](hardware/Electronics/electronics.md).
+
 - **Microcontrolador:** Arduino Uno.
 - **Sensores:**
     - Corrente/Tensão: INA219.
@@ -45,8 +47,11 @@ Com base na arquitetura definida para o protótipo:
 
 ```text
 ├── docs/            # Documentação, apresentações e artigo (LaTeX)
+│   └── Presentations/main.* # [LEGADO] Conteúdo desatualizado
 ├── firmware/        # Código fonte do microcontrolador (C++/Arduino)
 └── hardware/        # Design 3D (Inventor) e esquemas elétricos
+    ├── CAD/         # Arquivos de modelagem 3D (.ipt, .iam)
+    └── Electronics/  # Esquemáticos, listas de componentes e instruções de montagem
 ```
 
 ## 👥 Autores
