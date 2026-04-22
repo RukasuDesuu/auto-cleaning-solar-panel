@@ -6,14 +6,16 @@ st.set_page_config(page_title="ASCM Smart Dashboard", layout="wide", page_icon="
 
 # --- SIDEBAR: CONFIGURAÇÕES E STATUS ---
 st.sidebar.title("⚙️ Configurações Smart")
-city = st.sidebar.text_input("Localização (Cidade)", "Sao Paulo")
+lat = st.sidebar.number_input("Latitude", value=-23.1615, format="%.4f")
+lon = st.sidebar.number_input("Longitude", value=-45.8485, format="%.4f")
 eff_limit = st.sidebar.slider("Limiar de Sujeira (%)", 5, 30, 10)
 temp_limit = st.sidebar.slider("Delta de Temperatura (°C)", 2, 10, 5)
 auto_on = st.sidebar.toggle("Automação Ativa", True)
 
 if st.sidebar.button("Salvar Configurações"):
     new_cfg = {
-        "city": city,
+        "latitude": float(lat),
+        "longitude": float(lon),
         "efficiency_threshold": float(eff_limit),
         "temp_delta_limit": float(temp_limit),
         "automation_enabled": auto_on,
@@ -38,6 +40,18 @@ except Exception:
         "panel_ref": {"power": 0},
     }
 
+try:
+    resp_wt = requests.get("http://localhost:8000/weather", timeout=1)
+    weather_data = resp_wt.json()
+except Exception:
+    weather_data = {
+        "ambient_temp": 0,
+        "description": "N/A",
+        "is_raining": False,
+        "wind_speed": 0,
+        "humidity": 0,
+    }
+
 st.sidebar.divider()
 st.sidebar.header("📡 Status do Hardware")
 home_status = "🏠 HOME (Ativado)" if telemetry["limit_home"] == 0 else "⚪ Aberto"
@@ -45,11 +59,17 @@ end_status = "🏁 END (Ativado)" if telemetry["limit_end"] == 0 else "⚪ Abert
 st.sidebar.info(f"Fim de Curso Início: {home_status}")
 st.sidebar.info(f"Fim de Curso Final: {end_status}")
 
+st.sidebar.header("☁️ Clima Local")
+st.sidebar.write(f"**Condição:** {weather_data['description']}")
+st.sidebar.write(f"**Temp. Externa:** {weather_data['ambient_temp']}°C")
+st.sidebar.write(f"**Vento:** {weather_data['wind_speed']} km/h")
+st.sidebar.write(f"**Umidade:** {weather_data['humidity']}%")
+
 # --- CABEÇALHO ---
 st.title("🌤️ ASCM Smart Monitoring")
 c1, c2, c3 = st.columns(3)
-# Simulação de clima (pode ser expandido no backend)
-c1.metric("Temperatura Painel", f"{telemetry['temperature']} °C")
+# Dados do painel vs dados externos
+c1.metric("Temperatura Painel", f"{telemetry['temperature']} °C", delta=f"{telemetry['temperature'] - weather_data['ambient_temp']:.1f}°C")
 c2.metric("Luminosidade", f"{telemetry['lux']} LDR")
 c3.metric("Bomba/Rodo", "Ativo" if auto_on else "Manual")
 
