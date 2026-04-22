@@ -5,3 +5,4 @@
 *.fmsh
 *.log
 /OldVersions
+/Electronics/.xdp*
