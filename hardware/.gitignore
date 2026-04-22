@@ -1,8 +1,1 @@
-*.fins
-*.fsat
-*.ftes
-*.fwiz
-*.fmsh
-*.log
-/OldVersions
 /Electronics/.xdp*
