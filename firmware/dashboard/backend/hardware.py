@@ -147,11 +147,12 @@ class HardwareManager:
 
         if register == 0x01:  # Shunt Voltage Register (Corrente)
             raw_shunt = (data[5] << 8) | data[6]
-            if raw_shunt > 32767: raw_shunt -= 65536
-            
+            if raw_shunt > 32767:
+                raw_shunt -= 65536
+
             shunt_v_mv = raw_shunt * 0.01  # LSB = 10uV
             current_ma = shunt_v_mv / 0.1  # I = V / R(0.1 ohm)
-            
+
             # Guarda temporariamente (estado bruto em mA)
             self.state[key]["current"] = round(abs(current_ma), 2)
             # Salva o shunt em mV escondido no dicionário para a soma posterior
@@ -160,15 +161,15 @@ class HardwareManager:
         elif register == 0x02:  # Bus Voltage Register (Tensão)
             raw_bus = (data[5] << 8) | data[6]
             bus_v = (raw_bus >> 3) * 0.004
-            
+
             # Pega o shunt salvo ou assume 0 se ainda não chegou
             shunt_v_mv = self.state[key].get("_shunt_mv", 0.0)
-            
+
             # Tensão Real = Bus + Queda no Shunt
             total_v = bus_v + (shunt_v_mv / 1000.0)
-            
+
             self.state[key]["voltage"] = round(total_v, 3)
-            
+
             # A potência é calculada sempre que a tensão atualiza
             current_ma = self.state[key].get("current", 0.0)
             self.state[key]["power"] = round(total_v * (current_ma / 1000.0), 3)

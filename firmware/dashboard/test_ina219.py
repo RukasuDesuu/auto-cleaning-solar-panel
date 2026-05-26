@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from backend.hardware import HardwareManager
 
+
 def test_ina():
     print("--- Teste do Sensor INA219 ---")
     print("Tentando conectar ao Arduino...")
@@ -38,7 +39,7 @@ def test_ina():
     print("Iniciando leituras (Ctrl+C para parar)...")
     print("Endereço esperado: 0x40 (Painel Principal)")
     print("-----------------------------------------")
-    
+
     try:
         while True:
             # Solicita leitura do registrador de voltagem (0x02) e corrente (0x01 via _read_ina219)
@@ -51,12 +52,11 @@ def test_ina():
             v = data["voltage"]
             i = data["current"]
             p = data["power"]
-            
+
             print(f"[DATA] Painel: {v:5.3f}V | I: {i:6.2f}mA | P: {p:6.4f}W")
 
             time.sleep(0.5)
 
-            
     except KeyboardInterrupt:
         print("\nTeste interrompido pelo usuário.")
     except Exception as e:
@@ -65,8 +65,9 @@ def test_ina():
         print("Encerrando conexão com o Arduino...")
         try:
             hw.board.shutdown()
-        except:
+        except Exception:
             pass
+
 
 if __name__ == "__main__":
     test_ina()
