@@ -2,11 +2,35 @@ from fastapi import FastAPI, BackgroundTasks
 from .hardware import HardwareManager
 from .services.weather import WeatherService
 from .services.logger import CSVLogger
+from contextlib import asynccontextmanager
 import uvicorn
 import asyncio
 import time
+import os
+import csv
 
-app = FastAPI(title="ASCM Backend Smart API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: inicia o loop de automação em segundo plano
+    loop_task = asyncio.create_task(automation_loop())
+    yield
+    # Shutdown: cancela a tarefa e desliga os atuadores
+    loop_task.cancel()
+    try:
+        await loop_task
+    except asyncio.CancelledError:
+        pass
+
+    try:
+        hw.stop_wiper()
+        hw.set_pump("off")
+        logger.log_event("SHUTDOWN", "Servidor finalizado e atuadores desligados.")
+    except Exception:
+        pass
+
+
+app = FastAPI(title="ASCM Backend Smart API", lifespan=lifespan)
 hw = HardwareManager()
 weather = WeatherService()
 logger = CSVLogger()
@@ -24,6 +48,35 @@ config = {
 @app.get("/telemetry")
 async def get_telemetry():
     return hw.get_all_sensors()
+
+
+@app.get("/history/telemetry")
+async def get_telemetry_history(limit: int = 50):
+    """Retorna as últimas leituras de telemetria gravadas no arquivo CSV"""
+    history = []
+    if not os.path.exists(logger.telemetry_file):
+        return []
+    try:
+        with open(logger.telemetry_file, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                history.append(
+                    {
+                        "timestamp": row["timestamp"],
+                        "p_main_w": float(row["p_main_w"]) if row["p_main_w"] else 0.0,
+                        "p_ref_w": float(row["p_ref_w"]) if row["p_ref_w"] else 0.0,
+                        "temp_c": float(row["temp_c"]) if row["temp_c"] else 0.0,
+                        "lux": float(row["lux"]) if row["lux"] else 0.0,
+                        "limit_home": int(row["limit_home"])
+                        if row["limit_home"]
+                        else 1,
+                        "limit_end": int(row["limit_end"]) if row["limit_end"] else 1,
+                    }
+                )
+    except Exception as e:
+        logger.log_event("ERROR", f"Erro ao ler histórico de telemetria: {str(e)}")
+
+    return history[-limit:]
 
 
 @app.get("/weather")
@@ -162,18 +215,6 @@ def run_full_clean_cycle():
             hw.move_wiper("backward", 180)
             time.sleep(0.1)
 
-        hw.stop_wiper()
-        hw.set_pump("off")
-        logger.log_event("CLEAN_DONE", "Ciclo de limpeza finalizado com sucesso")
-    except Exception as e:
-        hw.stop_wiper()
-        hw.set_pump("off")
-        logger.log_event("CLEAN_ERROR", f"Erro durante ciclo de limpeza: {str(e)}")
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-    try:
         hw.stop_wiper()
         hw.set_pump("off")
         logger.log_event("CLEAN_DONE", "Ciclo de limpeza finalizado com sucesso")
