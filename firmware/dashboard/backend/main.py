@@ -29,8 +29,7 @@ async def get_telemetry():
 @app.get("/weather")
 async def get_weather():
     return weather.get_weather_data(
-        config.get("latitude", -23.1615), 
-        config.get("longitude", -45.8485)
+        config.get("latitude", -23.1615), config.get("longitude", -45.8485)
     )
 
 
@@ -76,10 +75,7 @@ async def get_lux():
 @app.get("/sensors/power")
 async def get_power():
     data = hw.get_all_sensors()
-    return {
-        "panel_main": data["panel_main"],
-        "panel_ref": data["panel_ref"]
-    }
+    return {"panel_main": data["panel_main"], "panel_ref": data["panel_ref"]}
 
 
 @app.post("/stop")
@@ -96,11 +92,6 @@ async def control_motor(direction: str, speed: int = 200):
     return {"motor": direction}
 
 
-@app.on_event("startup")
-async def startup_event():
-    asyncio.create_task(automation_loop())
-
-
 async def automation_loop():
     """Loop de automação e logging (1 vez por minuto)"""
     while True:
@@ -108,8 +99,7 @@ async def automation_loop():
             # 1. Coleta dados
             hw_data = hw.get_all_sensors()
             wt_data = weather.get_weather_data(
-                config.get("latitude", -23.5505), 
-                config.get("longitude", -46.6333)
+                config.get("latitude", -23.5505), config.get("longitude", -46.6333)
             )
 
             # 2. LOGGING: Salva telemetria no CSV
@@ -135,7 +125,10 @@ async def automation_loop():
                 p_ref = hw_data.get("panel_ref", {}).get("power", 0)
                 if p_ref > 0:
                     diff = ((p_ref - p_main) / p_ref) * 100
-                    if diff > config["efficiency_threshold"] and not wt_data["is_raining"]:
+                    if (
+                        diff > config["efficiency_threshold"]
+                        and not wt_data["is_raining"]
+                    ):
                         logger.log_event(
                             "AUTO_CLEAN",
                             f"Perda detectada ({diff:.1f}%). Iniciando limpeza.",
@@ -151,24 +144,36 @@ def run_full_clean_cycle():
     try:
         hw.set_pump("low")
         time.sleep(2)
-        
+
         # Avanço do rodo
         logger.log_event("CLEAN_STEP", "Iniciando avanço do rodo")
-        timeout = time.time() + 30 # Proteção contra travamento
+        timeout = time.time() + 30  # Proteção contra travamento
         while hw.get_all_sensors()["limit_end"] == 1 and time.time() < timeout:
             hw.move_wiper("forward", 180)
             time.sleep(0.1)
-        
+
         hw.stop_wiper()
         time.sleep(1)
-        
+
         # Retorno do rodo
         logger.log_event("CLEAN_STEP", "Iniciando retorno do rodo")
         timeout = time.time() + 30
         while hw.get_all_sensors()["limit_home"] == 1 and time.time() < timeout:
             hw.move_wiper("backward", 180)
             time.sleep(0.1)
-            
+
+        hw.stop_wiper()
+        hw.set_pump("off")
+        logger.log_event("CLEAN_DONE", "Ciclo de limpeza finalizado com sucesso")
+    except Exception as e:
+        hw.stop_wiper()
+        hw.set_pump("off")
+        logger.log_event("CLEAN_ERROR", f"Erro durante ciclo de limpeza: {str(e)}")
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    try:
         hw.stop_wiper()
         hw.set_pump("off")
         logger.log_event("CLEAN_DONE", "Ciclo de limpeza finalizado com sucesso")

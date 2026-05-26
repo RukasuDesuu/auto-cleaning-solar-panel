@@ -69,7 +69,11 @@ st.sidebar.write(f"**Umidade:** {weather_data['humidity']}%")
 st.title("🌤️ ASCM Smart Monitoring")
 c1, c2, c3 = st.columns(3)
 # Dados do painel vs dados externos
-c1.metric("Temperatura Painel", f"{telemetry['temperature']} °C", delta=f"{telemetry['temperature'] - weather_data['ambient_temp']:.1f}°C")
+c1.metric(
+    "Temperatura Painel",
+    f"{telemetry['temperature']} °C",
+    delta=f"{telemetry['temperature'] - weather_data['ambient_temp']:.1f}°C",
+)
 c2.metric("Luminosidade", f"{telemetry['lux']} LDR")
 c3.metric("Bomba/Rodo", "Ativo" if auto_on else "Manual")
 

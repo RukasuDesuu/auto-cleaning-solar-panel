@@ -26,7 +26,7 @@ class WeatherService:
             data = resp.json()
 
             current = data.get("current", {})
-            
+
             # Mapeamento simples de weather_code para descrição (WMO Weather interpretation codes)
             # 0: Sky clear, 1-3: Partly cloudy, 45-48: Fog, 51-67: Drizzle/Rain, etc.
             weather_code = current.get("weather_code", 0)
@@ -70,7 +70,7 @@ class WeatherService:
         """Verifica se há previsão de chuva nas próximas 3 horas"""
         if not hourly_data or "precipitation_probability" not in hourly_data:
             return False
-        
+
         # Próximas 3 horas
         next_probs = hourly_data["precipitation_probability"][:3]
-        return any(p > 30 for p in next_probs) # Mais de 30% de chance
+        return any(p > 30 for p in next_probs)  # Mais de 30% de chance
