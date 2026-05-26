@@ -18,7 +18,7 @@ def hardware_manager():
 def test_pump_control(hardware_manager):
     hardware_manager.set_pump("high")
     hardware_manager.board.analog_write.assert_called_with(
-        hardware_manager.PUMP_PIN, 255
+        hardware_manager.PUMP_ENB, 255
     )
 
 
