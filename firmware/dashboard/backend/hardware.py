@@ -21,7 +21,7 @@ class HardwareManager:
         self.LDR_PIN = 0  # A0
         self.TEMP_PIN = 1  # A1
 
-        # Estado dos sensores (Cache atualizado via callbacks)
+        # Estado dos sensores (Cache atualizado via callbacks) e Atuadores
         self.state = {
             "limit_home": 1,
             "limit_end": 1,
@@ -29,6 +29,9 @@ class HardwareManager:
             "temperature": 0.0,
             "panel_main": {"voltage": 0.0, "current": 0.0, "power": 0.0},
             "panel_ref": {"voltage": 0.0, "current": 0.0, "power": 0.0},
+            "pump": "off",
+            "wiper": "stopped",
+            "cleaning_active": False,
         }
 
         # Buffers para Média Móvel

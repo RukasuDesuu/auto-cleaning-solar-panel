@@ -38,6 +38,7 @@ except Exception:
         "lux": 0,
         "panel_main": {"power": 0},
         "panel_ref": {"power": 0},
+        "cleaning_active": False,
     }
 
 try:
@@ -104,11 +105,12 @@ if perda > eff_limit:
 # --- CONTROLES MANUAIS ---
 st.subheader("🚀 Comandos Manuais")
 cm1, cm2, cm3, cm4 = st.columns(4)
-if cm1.button("🧼 Ciclo Completo"):
+is_cleaning = telemetry.get("cleaning_active", False)
+if cm1.button("🧼 Ciclo Completo", disabled=is_cleaning):
     requests.post("http://localhost:8000/cycle/clean")
-if cm2.button("❄️ Arrefecer"):
+if cm2.button("❄️ Arrefecer", disabled=is_cleaning):
     requests.post("http://localhost:8000/cycle/cool")
-if cm3.button("🏠 Ir para Home"):
+if cm3.button("🏠 Ir para Home", disabled=is_cleaning):
     requests.post("http://localhost:8000/actuators/motor?direction=backward")
 if cm4.button("🛑 PARAR TUDO", type="primary"):
     requests.post("http://localhost:8000/stop")
