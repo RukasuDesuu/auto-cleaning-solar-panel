@@ -1,4 +1,4 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, BackgroundTasks, HTTPException
 from .hardware import HardwareManager
 from .services.weather import WeatherService
 from .services.logger import CSVLogger
@@ -81,8 +81,10 @@ async def get_telemetry_history(limit: int = 50):
 
 @app.get("/weather")
 async def get_weather():
-    return weather.get_weather_data(
-        config.get("latitude", -23.1615), config.get("longitude", -45.8485)
+    return await asyncio.to_thread(
+        weather.get_weather_data,
+        config.get("latitude", -23.1615),
+        config.get("longitude", -45.8485),
     )
 
 
@@ -102,6 +104,8 @@ async def start_cooling():
 
 @app.post("/cycle/clean")
 async def start_cleaning(background_tasks: BackgroundTasks):
+    if hw.state.get("cleaning_active", False):
+        raise HTTPException(status_code=409, detail="Ciclo de limpeza já em andamento")
     logger.log_event("CLEAN_START", "Iniciando ciclo completo de limpeza")
     background_tasks.add_task(run_full_clean_cycle)
     return {"status": "Ciclo de limpeza disparado"}
@@ -151,8 +155,11 @@ async def automation_loop():
         try:
             # 1. Coleta dados
             hw_data = hw.get_all_sensors()
-            wt_data = weather.get_weather_data(
-                config.get("latitude", -23.5505), config.get("longitude", -46.6333)
+            # Delegar chamada síncrona do weather para thread pool
+            wt_data = await asyncio.to_thread(
+                weather.get_weather_data,
+                config.get("latitude", -23.5505),
+                config.get("longitude", -46.6333),
             )
 
             # 2. LOGGING: Salva telemetria no CSV
@@ -169,9 +176,16 @@ async def automation_loop():
                         f"Temp painel ({hw_data['temperature']}°C) acima do limite",
                     )
                 else:
-                    # Se não estiver no ciclo de limpeza, desliga a bomba
-                    # (Precisaríamos de um estado para não interferir na limpeza)
-                    pass
+                    # Se não estiver no ciclo de limpeza e a bomba estiver ligada, desliga a bomba
+                    if (
+                        not hw_data.get("cleaning_active", False)
+                        and hw_data.get("pump", "off") != "off"
+                    ):
+                        hw.set_pump("off")
+                        logger.log_event(
+                            "AUTO_COOL_STOP",
+                            "Temperatura normalizada. Desligando arrefecimento.",
+                        )
 
                 # 4. Lógica de Limpeza
                 p_main = hw_data.get("panel_main", {}).get("power", 0)
@@ -195,6 +209,7 @@ async def automation_loop():
 
 def run_full_clean_cycle():
     try:
+        hw.state["cleaning_active"] = True
         hw.set_pump("low")
         time.sleep(2)
 
@@ -222,6 +237,8 @@ def run_full_clean_cycle():
         hw.stop_wiper()
         hw.set_pump("off")
         logger.log_event("CLEAN_ERROR", f"Erro durante ciclo de limpeza: {str(e)}")
+    finally:
+        hw.state["cleaning_active"] = False
 
 
 if __name__ == "__main__":

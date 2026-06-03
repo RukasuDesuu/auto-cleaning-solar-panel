@@ -31,6 +31,7 @@ class HardwareManager:
             "panel_ref": {"voltage": 0.0, "current": 0.0, "power": 0.0},
             "pump": "off",
             "wiper": "stopped",
+            "cleaning_active": False,
         }
 
         # Buffers para Média Móvel
