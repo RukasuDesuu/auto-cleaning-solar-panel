@@ -1,0 +1,74 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: abntex2-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+:=1 is an unknown function---line 1437 of file abntex2-alf.bst
+:=1 is an unknown function---line 1439 of file abntex2-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Database file #1: abntex2-options.bib
+Database file #2: bibliografia.bib
+:=1 is an unknown function---line 2037 of file abntex2-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+ptr=2, stack=
+abnt.cite.style
+1
+---the literal stack isn't empty
+while executing---line 2064 of file abntex2-alf.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
++---------------------------------------------------------+
+| Estilo bibliográfico abntex2-alf.bst versão v-1.9.7           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://www.abntex.net.br/                               |
++---------------------------------------------------------+
+You've used 6 entries,
+            6711 wiz_defined-function locations,
+            1226 strings with 10081 characters,
+and the built_in function-call counts, 7311 in all, are:
+= -- 923
+> -- 106
+< -- 173
++ -- 246
+- -- 32
+* -- 436
+:= -- 949
+add.period$ -- 17
+call.type$ -- 6
+change.case$ -- 38
+chr.to.int$ -- 14
+cite$ -- 4
+duplicate$ -- 645
+empty$ -- 306
+format.name$ -- 154
+if$ -- 1509
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 87
+newline$ -- 30
+num.names$ -- 20
+pop$ -- 104
+preamble$ -- 1
+purify$ -- 21
+quote$ -- 0
+skip$ -- 766
+stack$ -- 1
+substring$ -- 353
+swap$ -- 246
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 34
+width$ -- 0
+write$ -- 77
+(There were 4 error messages)

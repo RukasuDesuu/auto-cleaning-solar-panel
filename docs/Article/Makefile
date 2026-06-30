@@ -6,10 +6,8 @@ FLAGS=-interaction=nonstopmode -file-line-error
 all: build clean-temp
 
 build:
-	$(TEX) $(FLAGS) $(PROJECT).tex
-	$(BIBTEX) $(PROJECT)
-	$(TEX) $(FLAGS) $(PROJECT).tex
-	$(TEX) $(FLAGS) $(PROJECT).tex
+	-$(TEX) $(FLAGS) $(PROJECT).tex
+	-$(TEX) $(FLAGS) $(PROJECT).tex
 
 clean-temp:
 	find . -maxdepth 1 -name \*.aux -type f -delete

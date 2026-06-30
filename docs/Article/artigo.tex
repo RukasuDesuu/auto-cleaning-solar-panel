@@ -25,7 +25,7 @@
     \textbf{Desenvolvimento de Sistema Automatizado para Limpeza e Arrefecimento de Painéis Fotovoltaicos (ASCM)}
 }
 
-\author{
+\author{    
     César Kerber \\
     Lucas Ekroth \\
     Paulo Rangel \\
@@ -51,9 +51,25 @@
 
 \section{Introdução}
 
-A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica de diversos países. Segundo relatórios da organização de estudos energéticos \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, o Brasil alcançou a marca histórica em que a geração eólica e solar fotovoltaica combinadas ultrapassam um terço da eletricidade produzida no país \cite{ember_brazil_2024}. Paralelamente, na União Europeia, as fontes renováveis atingiram cerca de 30\% da matriz elétrica \cite{ember_eu_2026}. Com o crescimento exponencial da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
+A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica de diversos países. Segundo relatórios da organização de estudos energéticos \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, o Brasil alcançou a marca histórica em que a geração eólica e solar fotovoltaica combinadas ultrapassam um terço da eletricidade produzida no país \cite{ember_brazil_2024}, conforme ilustrado na Figura \ref{fig:grafico_ember}. Paralelamente, na União Europeia, as fontes renováveis atingiram cerca de 30\% da matriz elétrica \cite{ember_eu_2026}. Com o crescimento exponencial da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
 
-Apesar dos avanços tecnológicos nos materiais semicondutores, a eficiência operacional de um módulo fotovoltaico é drasticamente degradada por variáveis externas em campo. O primeiro fator crítico é o acúmulo de poeira, pólen, dejetos e poluentes suspensos no ar na superfície de vidro do painel, fenômeno conhecido na literatura como \textit{soiling} \cite{qi2025}. A poeira depositada obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos apontam que o acúmulo contínuo de poeira pode reduzir a eficiência do painel em até 7,84\% por semana em locais de alta taxa de deposição, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana ou precipitações pluviométricas de volume adequado \cite{qi2025}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/grafico_ember.png}
+    \caption{Geração elétrica renovável no Brasil, evidenciando o crescimento de eólica e solar.}
+    \label{fig:grafico_ember}
+    \centerline{\small Fonte: Adaptado de Ember (2024).}
+\end{figure}
+
+Apesar dos avanços tecnológicos nos materiais semicondutores, a eficiência operacional de um módulo fotovoltaico é drasticamente degradada por variáveis externas em campo. O primeiro fator crítico é o acúmulo de poeira, pólen, dejetos e poluentes suspensos no ar na superfície de vidro do painel, fenômeno conhecido na literatura como \textit{soiling} \cite{qi2025}. A poeira depositada obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos apontam que o acúmulo contínuo de poeira pode reduzir a eficiência do painel em até 7,84\% por semana em locais de alta taxa de deposição, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana ou precipitações pluviométricas de volume adequado \cite{qi2025}. O impacto negativo do acúmulo de sujidade na potência máxima de saída das células fotovoltaicas está quantificado graficamente na Figura \ref{fig:grafico_soiling}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/grafico_soiling.jpg}
+    \caption{Gráfico representativo das perdas na potência de saída em função da deposição de poeira ao longo de períodos secos.}
+    \label{fig:grafico_soiling}
+    \centerline{\small Fonte: Adaptado de Qi et al. (2025).}
+\end{figure}
 
 O segundo fator crítico relaciona-se ao coeficiente de temperatura do silício. O aquecimento natural do painel solar devido à radiação térmica eleva a temperatura de operação muito acima dos 25$^\circ$C padronizados em laboratório. Para cada grau Celsius acrescido à superfície, a potência máxima de saída do painel decresce linearmente entre 0,5\% e 0,6\% \cite{geetha2024}. A deposição de poeira agrava este quadro por atuar como isolante térmico local, mantendo o calor aprisionado sob a camada de sujeira e acelerando a degradação e o envelhecimento do módulo.
 
@@ -91,7 +107,51 @@ O hardware eletrônico está centrado no microcontrolador Arduino Uno R3. A pina
     \item \textbf{Subsistema Hidráulico:} Consiste em uma mini-bomba d'água submersível de 5V controlada via driver L298N (pino PWM 6 para fluxo e pinos digitais 7 e 8 para sentido/ativação) ligada a bicos aspersores instalados no topo do painel principal para nebulizar o fluido na superfície do vidro.
 \end{itemize}
 
-A alimentação de energia da ponte H é provida de forma externa por uma fonte de alimentação CC de 5V dedicada para motores e bomba, compartilhando a mesma referência de terra (GND) com o microcontrolador Arduino.
+A alimentação de energia da ponte H é provida de forma externa por uma fonte de alimentação CC de 5V dedicada para motores e bomba, compartilhando a mesma referência de terra (GND) com o microcontrolador Arduino. O diagrama de conexões elétricas e esquemático do protótipo eletrônico de montagem está ilustrado na Figura \ref{fig:diagrama_eletronica}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/diagrama_eletronica.png}
+    \caption{Diagrama de conexões elétricas e esquemático de montagem física dos componentes eletrônicos do ASCM.}
+    \label{fig:diagrama_eletronica}
+    \centerline{\small Fonte: Elaborado pelos autores.}
+\end{figure}
+
+\subsection{Design Mecânico e Modelagem 3D}
+
+O design estrutural e o mecanismo de movimentação linear do ASCM foram totalmente modelados utilizando o software de CAD tridimensional Autodesk Inventor, visando a prototipagem rápida através da fabricação por manufatura aditiva (impressão 3D por deposição de material fundido - FDM). O design mecânico compreende a modelagem dos seguintes componentes principais:
+\begin{itemize}
+    \item \textbf{Chassi Estrutural (Frame):} Estrutura que suporta os dois painéis solares em um ângulo de inclinação fixo otimizado para a irradiância solar da região geográfica e para o escoamento de água por gravidade.
+    \item \textbf{Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):} Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (\textit{Gear-Rack}) é fixada ao longo das guias lineares do frame, e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
+    \item \textbf{Suporte do Rodo (Wiper Support):} Peça personalizada que aloja o motor de tração com redução e fixa a haste do rodo de silicone contra a superfície do vidro do painel principal, garantindo uma pressão de contato uniforme para a varredura da poeira.
+    \item \textbf{Suporte de Aspersão (Sprinkler Support):} Fixadores posicionados no topo do painel que sustentam a tubulação hidráulica e os bicos aspersores orientados em ângulo que maximiza a área de cobertura da lâmina d'água na superfície.
+    \item \textbf{Suportes dos Painéis (Panel Support):} Peças de interface que prendem os módulos fotovoltaicos de forma rígida ao frame estrutural principal.
+\end{itemize}
+A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. O modelo tridimensional do chassi completo, o segmento da cremalheira linear e o suporte do rodo motorizado estão ilustrados nas Figuras \ref{fig:frame_cad}, \ref{fig:cremalheira_cad} e \ref{fig:wiper_cad}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/frame_cad.png}
+    \caption{Modelo tridimensional (CAD) do chassi estrutural (Frame) completo do ASCM no Autodesk Inventor.}
+    \label{fig:frame_cad}
+    \centerline{\small Fonte: Elaborado pelos autores.}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/cremalheira_cad.png}
+    \caption{Detalhe da cremalheira linear (Gear Rack) projetada em CAD.}
+    \label{fig:cremalheira_cad}
+    \centerline{\small Fonte: Elaborado pelos autores.}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/wiper_cad.png}
+    \caption{Modelo tridimensional do suporte do rodo motorizado (Wiper Support) e acoplamento do motor com o pinhão.}
+    \label{fig:wiper_cad}
+    \centerline{\small Fonte: Elaborado pelos autores.}
+\end{figure}
 
 \subsection{Arquitetura do Software e Comunicação}
 
@@ -124,6 +184,16 @@ A estratégia de automação funciona em ciclo contínuo em segundo plano e adot
         \item Desligamento do motor e da bomba hidráulica, retornando o sistema ao monitoramento em malha fechada.
     \end{itemize}
 \end{enumerate}
+
+A lógica de funcionamento integrada de controle periódico, monitoramento de limites e acionamentos automáticos baseados nas decisões térmicas e de sujeira é apresentada no fluxograma de controle da Figura \ref{fig:fluxograma_controle}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/fluxograma.png}
+    \caption{Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM.}
+    \label{fig:fluxograma_controle}
+    \centerline{\small Fonte: Elaborado pelos autores.}
+\end{figure}
 
 \section{Resultados Preliminares e Metodologia de Ensaios}
 

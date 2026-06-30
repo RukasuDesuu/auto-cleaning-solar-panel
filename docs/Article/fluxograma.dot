@@ -1,0 +1,45 @@
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif" fontsize=10]
+    edge [fontname="Helvetica,Arial,sans-serif" fontsize=9]
+
+    // Estilos de Nós
+    node [shape=box, style="filled,rounded", color="#1d3557", fillcolor="#e2eafc", penwidth=1.5]
+    start [label="Início\n(Laço de Automação)", shape=ellipse, fillcolor="#d8f3dc", color="#2d6a4f"]
+    read_sensors [label="Leitura dos Sensores\n- Temp. Superfície (LM35)\n- Potência Placas (INA219)\n- Lux (LDR)\n- API de Clima (Temp. e Chuva)"]
+    log_csv [label="Registrar Telemetria\nno Arquivo CSV"]
+    
+    // Decisão de Temperatura
+    dec_temp [label="Temperatura do Painel >\nTemp. Ambiente + Delta?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    cool_on [label="Ligar Arrefecimento\n(Bomba em Fluxo Alto)"]
+    cool_off [label="Desligar Arrefecimento\n(Bomba OFF)"]
+
+    // Decisão de Sujeira
+    dec_soil [label="Perda por Soiling >\nLimiar de Sujeira?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    dec_rain [label="Está Chovendo?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    clean_cycle [label="Ciclo de Limpeza Completo\n1. Molhar Placa (Bomba Low por 2s)\n2. Wiper Avança até Fim de Curso\n3. Wiper Retorna até Home\n4. Desligar Motores e Bomba"]
+    
+    wait_state [label="Aguardar 60 segundos", shape=ellipse, fillcolor="#f1f5f9", color="#64748b"]
+
+    // Conexões
+    start -> read_sensors;
+    read_sensors -> log_csv;
+    log_csv -> dec_temp;
+    
+    // Ramo de Temperatura
+    dec_temp -> cool_on [label="Sim"];
+    dec_temp -> cool_off [label="Não"];
+    
+    cool_on -> dec_soil;
+    cool_off -> dec_soil;
+    
+    // Ramo de Sujeira
+    dec_soil -> dec_rain [label="Sim"];
+    dec_soil -> wait_state [label="Não"];
+    
+    dec_rain -> clean_cycle [label="Não"];
+    dec_rain -> wait_state [label="Sim (Evita desperdício)"];
+    
+    clean_cycle -> wait_state;
+    wait_state -> read_sensors;
+}
