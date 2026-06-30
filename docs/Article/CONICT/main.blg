@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2025)
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: abntex2-alf.bst
@@ -7,21 +7,13 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-:=1 is an unknown function---line 1437 of file abntex2-alf.bst
-:=1 is an unknown function---line 1439 of file abntex2-alf.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: abntex2-options.bib
 Database file #2: bibliografia.bib
-:=1 is an unknown function---line 2037 of file abntex2-alf.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-ptr=2, stack=
-abnt.cite.style
-1
----the literal stack isn't empty
-while executing---line 2064 of file abntex2-alf.bst
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
@@ -30,45 +22,44 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 | Em caso de dúvidas ou problemas com este estilo procure |
 | http://www.abntex.net.br/                               |
 +---------------------------------------------------------+
-You've used 6 entries,
-            6711 wiz_defined-function locations,
-            1226 strings with 10081 characters,
-and the built_in function-call counts, 7311 in all, are:
-= -- 923
-> -- 106
-< -- 173
-+ -- 246
-- -- 32
-* -- 436
-:= -- 949
-add.period$ -- 17
-call.type$ -- 6
-change.case$ -- 38
-chr.to.int$ -- 14
-cite$ -- 4
-duplicate$ -- 645
-empty$ -- 306
-format.name$ -- 154
-if$ -- 1509
-int.to.chr$ -- 1
+You've used 8 entries,
+            6714 wiz_defined-function locations,
+            1239 strings with 10871 characters,
+and the built_in function-call counts, 6748 in all, are:
+= -- 627
+> -- 213
+< -- 12
++ -- 126
+- -- 63
+* -- 428
+:= -- 930
+add.period$ -- 27
+call.type$ -- 8
+change.case$ -- 83
+chr.to.int$ -- 20
+cite$ -- 7
+duplicate$ -- 327
+empty$ -- 450
+format.name$ -- 313
+if$ -- 1622
+int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 87
-newline$ -- 30
-num.names$ -- 20
-pop$ -- 104
+missing$ -- 136
+newline$ -- 43
+num.names$ -- 35
+pop$ -- 182
 preamble$ -- 1
-purify$ -- 21
+purify$ -- 32
 quote$ -- 0
-skip$ -- 766
+skip$ -- 442
 stack$ -- 1
-substring$ -- 353
-swap$ -- 246
-text.length$ -- 12
+substring$ -- 257
+swap$ -- 186
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 34
+while$ -- 48
 width$ -- 0
-write$ -- 77
-(There were 4 error messages)
+write$ -- 121

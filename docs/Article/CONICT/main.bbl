@@ -5,33 +5,50 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
-\bibitem[Alves e Rodrigues 2004]{alves}
-\abntrefinfo{Alves e Rodrigues}{Alves; Rodrigues}{2004}
-{ALVES, S.~P.; RODRIGUES, E. Sombreamento arbóreo e orientação de
-  instalações avícolas.
-\textbf{Engenharia Agrícola}, v.~24, n.~2, p. 241 -- 245, 2004.}
+\bibitem[{ASCM Project Contributors} 2026]{telemetrix_ref}
+\abntrefinfo{{ASCM Project Contributors}}{{ASCM Project Contributors}}{2026}
+{{ASCM Project Contributors}. \emph{Firmware do Dashboard e Integração
+  Telemetrix}. 2026. \url{firmware/dashboard/backend/hardware.py}.
+Acesso em: 03 jun. 2026.}
 
-\bibitem[Galvani 2008]{galvani}
-\abntrefinfo{Galvani}{Galvani}{2008}
-{GALVANI, E. Estudo comparativo dos elementos do balanço hídrico
-  climatológico para duas cidades do estado de são paulo e para paris.
-Confins [Online], v.~4, n.~4, p. 1--106, 2008.
-Dispon{\'\i}vel em: \url{<http://confins.revues.org/4733>. doi:
-  10.400/confins.4733}.}
+\bibitem[Derakhshandeh et al. 2021]{derakhshandeh2021}
+\abntrefinfo{Derakhshandeh et al.}{DERAKHSHANDEH et al.}{2021}
+{DERAKHSHANDEH, J.~F. et al. A comprehensive review of automatic cleaning
+  systems of solar panels.
+\emph{Sustainable Energy Technologies and Assessments}, Elsevier, v.~47, p.
+  101518, 2021.}
 
-\bibitem[Instruments 2019]{national_instruments}
-\abntrefinfo{Instruments}{Instruments}{2019}
-{INSTRUMENTS, N. \textbf{\textit{Data Acquisition}}.
-[S.l.], 2019. Dispon{\'\i}vel em:
-  \url{http://www.ni.com/pt-br/shop/select/compactdaq-controller}. Acesso em:
-  19 Abril. 2019.}
+\bibitem[EMBER 2024]{ember_brazil_2024}
+\abntrefinfo{EMBER}{EMBER}{2024}
+{EMBER. \emph{Wind and solar generate over a third of Brazil's electricity for
+  the first month on record}. 2024.
+  \url{https://ember-energy.org/latest-insights/wind-and-solar-generate-over-a-third-of-brazils-electricity-for-the-first-month-on-record/}.
+Acesso em: 24 mar. 2026.}
 
-\bibitem[Pandorfi et al.]{pandorfi}
-\abntrefinfo{Pandorfi et al.}{Pandorfi et al.}{}
-{PANDORFI, H. et al. Estudo da lógica fuzzy na caracterização do ambiente
-  produtivo para matrizes gestantes.
-\textbf{Engenharia Agrícola}, v.~27, n.~1, p. 83--92.
-Dispon{\'\i}vel em: \url{http://www.scielo.br/pdf/eagri/v27n1/01.pdf}. Acesso
-  em: 24 Setembro. 2007.}
+\bibitem[EMBER 2026]{ember_eu_2026}
+\abntrefinfo{EMBER}{EMBER}{2026}
+{EMBER. \emph{European Electricity Review 2026}. 2026.
+  \url{https://ember-energy.org/latest-insights/european-electricity-review-2026/}.
+Acesso em: 24 mar. 2026.}
+
+\bibitem[Geetha et al. 2024]{geetha2024}
+\abntrefinfo{Geetha et al.}{GEETHA et al.}{2024}
+{GEETHA, A. et al. Solar panel self-cleaning mechanisms and its effect on the
+  economic and environmental sustainability.
+\emph{Journal of Electrical and Computer Engineering}, Hindawi, v.~2024, p.
+  Article ID 7726716, 2024.}
+
+\bibitem[Mendis et al. 2026]{mendis2026}
+\abntrefinfo{Mendis et al.}{MENDIS et al.}{2026}
+{MENDIS, B. M. A.~R. et al. Dual-axis solar tracking system with real-time
+  weather-responsive self-cleaning mechanism for photovoltaic panels.
+\emph{Renewable Energy}, Elsevier, v.~259, p. 125084, 2026.}
+
+\bibitem[Qi et al. 2025]{qi2025}
+\abntrefinfo{Qi et al.}{QI et al.}{2025}
+{QI, J. et al. Combining dust scaling behaviors of pv panels and water cleaning
+  methods.
+\emph{Renewable and Sustainable Energy Reviews}, Elsevier, v.~212, p. 115394,
+  2025.}
 
 \end{thebibliography}

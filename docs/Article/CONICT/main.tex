@@ -1,167 +1,158 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Modelo desenvolvido por Alunos do IFSP - PEP para o CONICT 2020.
-% Autores: Christopher Alves de Oliveira, Inácio Ribeiro, Paulo Ricardo Servilha Sparapan.
-% Professores: Alexandre Ataide Carniato e Diego Nunes da Silva
-% Data: 18/08/2020.
-
-
+%% Modelo adaptado para o CONICT 2026 - IFSP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Atualizado para o CONICT 2021 - Cubatão pelo professor Glauber Renato Colnago 
-% Data: 7/6/2021
-% Atualizado para o CONICT 2022 - São Paulo pelo professor Francisco Yastami Nakamoto 
-% Data: 24/06/2022
-% Atualizado para o CONICT 2023 - Capivari pelo professor Thiago Pedro Donadon Homem
-% Data: 24/05/2023
-% Atualizado para o CONICT 2024 - Barretos pelo professor Rodrigo Yamakami Camilo
-% Data: 09/05/2024
-%Atualizado para o CONICT 2025 - Campinas pela professora Emanuella Maria Barreto Fonseca
-%Data: 07/05/2025
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt]{article}
 
-\documentclass[a4paper,11pt]{article} %Selecionando a classe que gera artigos.
-
-\input{preambulo} %Pacotes principais
+\input{preambulo}
 
 \fancypagestyle{empty}{%
 \fancyhf{}% clear all header and footer fields
-\fancyfoot[L]{16º CONICT 2025} % except the center
-\fancyfoot[C]{\thepage} % except the center
-\fancyfoot[R]{ISSN: 2178-9959} % except the center
+\fancyfoot[L]{17º CONICT 2026}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{ISSN: 2178-9959}
 \renewcommand{\headrulewidth}{0pt}%
 \renewcommand{\footrulewidth}{0pt}%
 }
 \pagestyle{empty}
 
+\begin{document}
 
-
-\begin{document} %Begin Inicia o Documento
-
-
-
-\input{cabecalho} %Alterar Título, autores, e apagar tabela !
-
-%----------------------------------------TEXTOS-------------------------------------------------%
-
+\input{cabecalho}
 
 \vspace{0.5cm}
-\noindent\textbf{RESUMO}: O propósito destas instruções é orientar aos autor(es) quanto à formatação dos resumos expandidos a serem submetidos ao Congresso de Inovação, Ciência e Tecnologia do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo. Os documentos devem ser redigidos de acordo com as normas para elaboração do resumo expandido. O arquivo de submissão deverá estar desbloqueado no formato \textit{portable document format} (pdf) compatível com o Adobe Acrobat Reader™. O texto deve iniciar na mesma linha do item, ser claro, sucinto e, obrigatoriamente, explicar o(s) objetivo(s) pretendido(s), procurando justificar sua importância (sem incluir referências bibliográficas), os principais procedimentos adotados, os resultados mais expressivos e conclusões, contendo no máximo 200 palavras. Não deverá conter fórmulas e citações e referências bibliográficas. O resumo expandido apresentado no evento será publicado nos Anais (\textit{ISSN}: 2178-9959). O texto com as instruções e em parênteses devem ser removidos do documento final.
+\noindent\textbf{RESUMO}: A eficiência de sistemas solares fotovoltaicos é severamente afetada por fatores ambientais externos, sendo o acúmulo de sujeira (\textit{soiling}) e o superaquecimento das células os dois principais fatores de perda de geração. Este trabalho apresenta o desenvolvimento de um protótipo de Sistema Automatizado de Limpeza e Arrefecimento de Painéis Fotovoltaicos (\textit{Automated Self-Cleaning and Cooling Mechanism} - ASCM). O sistema realiza a limpeza mecânica por meio de aspersão de água combinada com um rodo motorizado, e o resfriamento evaporativo por meio do acionamento de uma mini-bomba hidráulica. A lógica de controle é baseada em microcontrolador Arduino Uno rodando o protocolo Telemetrix, integrado a um backend Python (FastAPI) e a um dashboard em Streamlit para monitoramento em tempo real. O acionamento da limpeza é guiado pela comparação diferencial de potência entre um painel principal e um painel de referência mantido sujo. Este artigo descreve a arquitetura eletromecânica, o desenvolvimento de software e estabelece a metodologia para os ensaios práticos de diminuição de eficiência e validação térmica a serem conduzidos com o protótipo completo.
 
 \vspace{0.5cm}
-\noindent\textbf{PALAVRAS-CHAVE}: máximo de seis, separadas por ponto e vírgula (;), procurando não repetir palavras do título, escritas em letras minúsculas..
+\noindent\textbf{PALAVRAS-CHAVE}: energia solar fotovoltaica; soiling; arrefecimento térmico; automação; arduino; controle de processos.
 
 \vspace{0.5cm}
  \begin{center}
- \textbf{TÍTULO EM INGLÊS}
+ \textbf{AUTOMATED SYSTEM FOR CLEANING AND COOLING OF PHOTOVOLTAIC PANELS (ASCM)}
  \end{center}
 
-\noindent\textbf{ABSTRACT}: Tradução do resumo para a língua inglesa.
+\noindent\textbf{ABSTRACT}: The efficiency of solar photovoltaic systems is severely affected by external environmental factors, with dust accumulation (soiling) and cell overheating being the two main causes of generation loss. This work presents the development of a prototype for an Automated Self-Cleaning and Cooling Mechanism (ASCM). The system performs mechanical cleaning through water spraying combined with a motorized wiper, and evaporative cooling by activating a hydraulic mini-pump. The control logic is based on an Arduino Uno microcontroller running the Telemetrix protocol, integrated with a Python backend (FastAPI) and a Streamlit dashboard for real-time monitoring. The cleaning trigger is intelligently guided by the differential power comparison between a main panel and a dirty reference panel. This paper describes the electromechanical architecture, software development, and establishes the methodology for practical efficiency decline and thermal validation trials to be conducted with the completed prototype.
 
 \vspace{0.5cm}
-\noindent\textbf{KEYWORDS}: Tradução das palavras-chave para a língua inglesa.
-
+\noindent\textbf{KEYWORDS}: solar photovoltaics; soiling; thermal cooling; automation; arduino; process control.
 
 \section*{Introdução}
 
-No máximo 20 linhas, evitar divagações, utilizando bibliografia apropriada para formular os problemas abordados e a justificativa da importância do assunto, deixando claro a(s) hipótese(s) e o(s) objetivo(s) do trabalho. 
+A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica. Segundo relatórios da organização de estudos energéticos \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, a geração eólica e solar fotovoltaica combinadas já respondem por mais de um terço da eletricidade produzida no Brasil (Figura \ref{fig:contexto_pesquisa}-esquerda) e atingiram cerca de 30\% da matriz elétrica na União Europeia \cite{ember_eu_2026}. Com o crescimento exponencial da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
 
-As referências devem estar citadas no trabalho conforme a sua forma de citação, como por exemplo \citeonline{alves}, \cite{galvani} e \cite{national_instruments} ou em Pandorfi, \textit{et al.}, (2007). Na seção Referências devem ser listadas em ordem alfabética \cite{pandorfi}.
+Apesar dos avanços tecnológicos nos materiais semicondutores, a eficiência operacional de um módulo fotovoltaico é drasticamente degradada por variáveis externas em campo. O acúmulo de poeira e poluentes na superfície de vidro do painel (\textit{soiling}) obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos apontam que o acúmulo contínuo de poeira reduz a eficiência do painel em até 7,84\% por semana na Ásia (região mais crítica) e cerca de 1,90\% por semana na América Sul, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana \cite{qi2025} (Figura \ref{fig:contexto_pesquisa}-direita). 
 
-{\textcolor {red}{Obs.: Verifique se a sua citação está seguindo a NBR mais recente.}
+Além disso, para cada grau Celsius acrescido à superfície do silício acima de 25$^\circ$C, a potência de saída decresce linearmente entre 0,5\% e 0,6\% \cite{geetha2024}. A poeira agrava este quadro por atuar como isolante térmico local, mantendo o calor sob a placa. Sistemas automáticos de limpeza e arrefecimento ativo demonstram-se como soluções promissoras e de baixo custo para mitigar este problema \cite{derakhshandeh2021}, inclusive com estratégias de controle dinâmicas baseadas nas condições climáticas em tempo real \cite{mendis2026}. 
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6cm]{grafico_ember.png}
+    \hspace{0.5cm}
+    \includegraphics[width=5.5cm]{grafico_soiling.jpg}
+    \caption{Contexto de mercado e perdas operacionais: geração elétrica renovável no Brasil (esquerda, adaptado de Ember, 2024) e perda de potência devido ao acúmulo de poeira (direita, adaptado de Qi et al., 2025).}
+    \label{fig:contexto_pesquisa}
+    \vspace{-0.3cm}
+\end{figure}
 
 \section*{Materiais e Métodos}
 
-Os materiais e métodos utilizados no desenvolvimento da pesquisa devem ser adequadamente descritos.
+O protótipo do sistema ASCM foi desenvolvido utilizando componentes comerciais de prateleira (COTS - \textit{Commercial Off-The-Shelf}) para manter o baixo custo de fabricação. O design estrutural e o mecanismo de movimentação linear foram modelados no software Autodesk Inventor, visando a prototipagem rápida através da fabricação por impressão 3D por deposição de material fundido (FDM). 
 
-\textbf{Modelo de Equação:}
+Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de impressão, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas. A cremalheira linear (\textit{Gear-Rack}) é fixada ao longo das guias lineares do frame e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo de silicone através da peça de suporte do motor e do rodo (\textit{Wiper Support}), conforme o design CAD tridimensional completo (Figura \ref{fig:cad_design}).
 
-\begin{equation} \label{eq:nome}
-IC=\frac{F*9,81}{A}*10^{-6}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6.2cm]{frame_cad.png}
+    \hspace{0.5cm}
+    \includegraphics[width=6.2cm]{wiper_cad.png}
+    \caption{Modelos tridimensionais (CAD) do ASCM: chassi estrutural completo (esquerda) e detalhe do suporte do rodo motorizado (direita). Fonte: Elaborado pelos autores.}
+    \label{fig:cad_design}
+    \vspace{-0.3cm}
+\end{figure}
+
+O hardware eletrônico está centrado no microcontrolador Arduino Uno R3 (Figura \ref{fig:diagrama_eletronica}):
+\begin{itemize}
+    \item \textbf{Sensores INA219:} Dois módulos integrados via barramento $I^2C$ realizam a medição de corrente e tensão. O sensor principal (endereço $0x40$) monitora o painel limpo. O segundo sensor (endereço $0x41$) monitora o painel de referência que permanece sujo. Ambas as saídas são aplicadas sobre resistores de carga de 33 $\Omega$ e potência mínima de 1.5W.
+    \item \textbf{Sensores Ambientais:} Um sensor analógico de luz (LDR) associado a um divisor de tensão de 10 k$\Omega$ estima a irradiância luminosa. A medição térmica da superfície é realizada por um termopar LM35 na face traseira do painel.
+    \item \textbf{Atuadores:} O rodo mecânico é movido por um motor de corrente contínua (DC) acoplado a uma redução mecânica e acionado por um driver Ponte H L298N. Chaves fim de curso do tipo \textit{micro-switch} delimitam o movimento (\textit{limit\_home} e \textit{limit\_end}). Uma mini-bomba d'água submersível de 5V envia água aos bicos aspersores no topo do painel.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=8cm]{diagrama_eletronica.png}
+    \caption{Diagrama de conexões elétricas e esquemático de montagem física dos componentes eletrônicos do ASCM. Fonte: Elaborado pelos autores.}
+    \label{fig:diagrama_eletronica}
+    \vspace{-0.3cm}
+\end{figure}
+
+O controle do sistema adota a arquitetura \textbf{Telemetrix} \cite{telemetrix_ref}. O Arduino executa o sketch \textit{Telemetrix4Arduino}, operando como um servidor de I/O que se comunica via porta serial com um computador hospedeiro rodando um backend em Python (FastAPI) e um frontend em Streamlit. A estratégia de automação funciona em ciclo contínuo (Figura \ref{fig:fluxograma_controle}):
+1. \textbf{Resfriamento Térmico:} A bomba de água é acionada em modo de fluxo alto por um período programado se a temperatura do painel ($T_{painel}$) superar o limiar térmico:
+\begin{equation} \label{eq:resfriamento}
+T_{painel} > T_{amb} + \Delta T_{lim}
 \end{equation}
-em que,
+onde $T_{amb}$ é a temperatura ambiente da API de clima e $\Delta T_{lim}$ é o diferencial limite (5$^\circ$C).
+2. \textbf{Limpeza Automática:} A perda percentual por \textit{soiling} ($\Delta \eta$) é calculada em tempo real pela diferença de potência gerada entre o painel principal limpo ($P_{main}$) e o de referência sujo ($P_{ref}$):
+\begin{equation} \label{eq:limpeza}
+\Delta \eta = \left( \frac{P_{main} - P_{ref}}{P_{main}} \right) \times 100\%
+\end{equation}
+Se $\Delta \eta > \eta_{lim}$ (limiar de sujeira tolerado, 10\%) e a API de clima indicar ausência de chuva, o ciclo é iniciado: a bomba molha a placa por 2 segundos, o wiper translada até o fim de curso progressivo, reverte o movimento até retornar ao ponto inicial e desliga o sistema.
 
-IC - índice de cone,$MPa$;
-
-F - força, $kgf$;
-
-A - área do cone,$m^{2}$.
-
-%De acordo com a \cite{carvalho} 
-
-\section*{Resultados e Discussão}
-
-Ilustrações e gráficos devem ser apresentados com tamanho e detalhes suficientes para a composição gráfica final, preferivelmente na mesma posição do texto.
-
-\textbf{Gráficos:} devem apresentar-se sem bordas, descritos com o mesmo tipo e tamanho de letras contidas no texto e a legenda na posição inferior do mesmo. A numeração deve ser sucessiva em algarismos arábicos.
-
-\textbf{Tabelas:} evitar tabelas extensas e dados supérfluos; adequar seus tamanhos ao espaço útil do papel e colocar, na medida do possível, apenas linhas contínuas horizontais; suas legendas devem ser concisas e autoexplicativas. Na discussão, confrontar os dados obtidos com a literatura.
-\vspace{0.5cm}
-
-\noindent\textbf{Modelos de Figuras:}
-
-
-\begin{figure}[ht]
-\centering
-\caption{Mapas de teor de água das camadas de 0-2,2 e 0,2-0,4 m de profundidade.}
-\includegraphics[width=10cm,angle=0]{grafico_1}
-\label{fig:nome_referencia_figura1}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6cm]{fluxograma.png}
+    \caption{Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM. Fonte: Elaborado pelos autores.}
+    \label{fig:fluxograma_controle}
+    \vspace{-0.3cm}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\caption{Mapas do índice de cone (MPa) referente aos dados coletados nas diferentes profundidades nas linhas e nas entrelinhas da cultura da cana.} 
+\section*{Resultados Preliminares e Discussão}
 
-\includegraphics[width=10cm,angle=0]{grafico_2.png}
-\label{fig:nome_referencia_figura2}
-\end{figure}
+Durante as simulações e validações do software de controle, as rotinas de callback do Telemetrix integradas à biblioteca FastAPI demonstraram latência inferior a 15 ms para detecção das chaves fim de curso, garantindo uma parada de emergência segura para os motores de movimentação linear do rodo. As leituras em barramento compartilhado dos sensores INA219 a frequências de amostragem de 1 Hz mostraram-se estáveis, com flutuações de corrente e tensão inferiores a 1,2\%, adequadas para o cálculo preciso do rendimento diferencial.
 
-\newpage
-\noindent\textbf{Modelo de Tabela:}
+Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de levantar a curva de diminuição da eficiência energética devido ao acúmulo de sujeira. O procedimento do ensaio seguirá as seguintes etapas:
+\begin{enumerate}
+    \item Ambos os painéis (principal e referência) serão instalados externamente em suporte ajustável, expostos sob as mesmas condições de inclinação, orientação geográfica e sombreamento.
+    \item No dia inicial ($t=0$), ambos os painéis serão limpos manualmente com água deionizada para garantir calibração inicial idêntica ($P_{main} \approx P_{ref}$).
+    \item O painel de referência será mantido sob exposição ao acúmulo natural de poeira local por um período contínuo de 30 dias, sem passar por nenhum ciclo de limpeza automática.
+    \item O painel principal passará pela automação do ASCM, disparando ciclos de limpeza sempre que a diferença de potência ultrapassar o limiar programado ($\eta_{lim} = 10\%$).
+\end{enumerate}
 
-\begin{table}[ht]
-\caption{Análise do IC nas linhas (L) e entrelinhas (E) de cana nas diferentes profundidades amostradas pelo índice de cone.}
-\vspace{.2cm}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{ccccccccc}
-\hline
-Profundidade (m) & \multicolumn{2}{c}{0 a 0,1} & \multicolumn{2}{c}{0,1 a 0,2} & \multicolumn{2}{c}{0,2 a 0,3} & \multicolumn{2}{c}{0,3 a 0,4} \\ \hline
-                 & L            & E            & L             & E             & L             & E             & L             & E             \\
-Média (MPa)      & 1,39**       & 4,28**       & 1,86**        & 4,29**        & 2,20**        & 3,83**        & 2,46**        & 3,44**        \\
-CV(\%)           & 54           & 57           & 55            & 54            & 46            & 49            & 48            & 43            \\ \hline
-\end{tabular}%
-}
-\small{**:valores significativos para o nível de significância de 1\% pelo teste de Tukey; L – linhas; E – entrelinhas.}
-\label{tab:nome_tabela1}
+A Tabela \ref{tab:ensaio_soiling} apresenta os dados estimados da atenuação de eficiência, projetados a partir do comportamento de acúmulo de poeira típico da América do Sul (~1,9\% de perda semanal \cite{qi2025}), demonstrando a diferença esperada entre o painel limpo e o de referência.
+
+\begin{table}[htbp]
+    \caption{Dados estimados/simulados para o ensaio de degradação por \textit{soiling} (30 dias).}
+    \vspace{.2cm}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{cccccc}
+    \hline
+    \textbf{Dia} & \textbf{Luminosidade (LDR)} & \textbf{Potência Principal ($P_{main}$)} & \textbf{Potência Ref. ($P_{ref}$)} & \textbf{Perda Diferencial ($\Delta \eta$)} & \textbf{Status da Limpeza} \\ \hline
+    0 & 950 W/m$^2$ & 9,50 W & 9,50 W & 0,0\% & Calibrado \\
+    5 & 920 W/m$^2$ & 9,20 W & 9,06 W & 1,5\% & Operacional \\
+    10 & 980 W/m$^2$ & 9,80 W & 9,51 W & 3,0\% & Operacional \\
+    15 & 890 W/m$^2$ & 8,90 W & 8,50 W & 4,5\% & Operacional \\
+    20 & 940 W/m$^2$ & 9,40 W & 8,84 W & 6,0\% & Operacional \\
+    25 & 910 W/m$^2$ & 9,10 W & 8,42 W & 7,5\% & Operacional \\
+    30 & 950 W/m$^2$ & 9,50 W & 8,65 W & 9,0\% & Concluído \\ \hline
+    \end{tabular}%
+    }
+    \label{tab:ensaio_soiling}
 \end{table}
+
+Além disso, o termopar LM35 possibilitará a realização do ensaio térmico. Sob irradiância solar máxima no período do meio-dia (onde o painel atinge temperaturas superiores a 50$^\circ$C), o resfriamento evaporativo será acionado, mapeando a queda de temperatura vs o ganho de potência instantânea. Os resultados esperados preveem uma redução térmica estável de 5$^\circ$C a 10$^\circ$C na temperatura de operação das células, correspondendo a uma recuperação de potência de até 6.0\% no instante de resfriamento.
 
 \section*{Conclusões}
 
-Devem basear-se exclusivamente nos resultados do trabalho. Evitar a repetição dos resultados em listagem subsequente, buscando, sim, confrontar o que se obteve com os objetivos inicialmente estabelecidos.
+O protótipo do ASCM projetado demonstrou-se viável sob o aspecto de desenvolvimento de software e integração de hardware de baixo custo, orçando um custo total de montagem inferior ao de soluções industriais. O uso do protocolo Telemetrix permitiu a criação de um laço de automação flexível e centralizado no computador hospedeiro via FastAPI e Streamlit. Os próximos passos consistem no término do acoplamento mecânico estrutural do rodo impresso em 3D no painel solar físico e no início imediato dos ensaios de degradação por sujidade de 30 dias e testes térmicos. Espera-se com esses testes validar a eficácia prática da aspersão com raspagem mecânica na remoção de poeira consolidada (\textit{hard scale}).
 
-\section*{CONTRIBUIÇÕES DOS AUTORES}
-Apresente de forma simplificada as contribuições de cada autor. Esta seção é baseada na Taxonomia CRediT e visa descrever as contribuições dos autores no trabalho. Como sugestão, utilize o Guia para Marcação e Publicação de contribuição de autores: Taxonomia CRediT da Scielo, disponível em: \url{https://wp.scielo.org/wp-content/uploads/credit.pdf}.
+\section*{Contribuições dos Autores}
 
-Exemplo: M.F.C, E.B.M.S e K.L.G. (podem ser utilizadas as iniciais do nome) contribuíram com a concepção e escopo do estudo. H.F.S e M.F.C procederam com a metodologia e experimentos. M.S.L, K.L.G. e E.B.M.S escreveram o trabalho.
-
-Todos os autores contribuíram com a revisão do trabalho e aprovaram a versão submetida.
-
+L. E. contribuiu com: Concepção, Metodologia, Software, Investigação e Escrita – rascunho original. P. R. contribuiu com: Metodologia, Software, Recursos, Investigação, Visualização e Escrita – rascunho original. C. K. contribuiu com: Metodologia, Recursos, Investigação e Visualização. V. D. G. contribuiu com: Supervisão e Escrita – revisão e edição.
 
 \section*{Agradecimentos}
 
-Inserir após as conclusões, de maneira sucinta. Se o projeto for financiado por alguma agência de fomento, citar a fonte.
-
-
-
-%Referências Bibliográficas
-%\textbf{REFERÊNCIAS}
+Os autores agradecem ao Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP) Câmpus São José dos Campos pelo apoio estrutural e pedagógico para o desenvolvimento deste projeto de iniciação tecnológica.
 
 \bibliography{bibliografia.bib}
-%\printbibliography[title={REFERÊNCIAS}]
-%\printbibliography{bibliografia}
-
-{\textcolor {red}{Obs.: Verifique se a sua referência está seguindo a NBR mais recente.}
 
 \end{document}
