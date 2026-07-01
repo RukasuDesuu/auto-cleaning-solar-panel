@@ -1,4 +1,5 @@
 digraph G {
+    rankdir=LR
     fontname="Helvetica,Arial,sans-serif"
     node [fontname="Helvetica,Arial,sans-serif" fontsize=10]
     edge [fontname="Helvetica,Arial,sans-serif" fontsize=9]
@@ -6,40 +7,47 @@ digraph G {
     // Estilos de Nós
     node [shape=box, style="filled,rounded", color="#1d3557", fillcolor="#e2eafc", penwidth=1.5]
     start [label="Início\n(Laço de Automação)", shape=ellipse, fillcolor="#d8f3dc", color="#2d6a4f"]
-    read_sensors [label="Leitura dos Sensores\n- Temp. Superfície (LM35)\n- Potência Placas (INA219)\n- Lux (LDR)\n- API de Clima (Temp. e Chuva)"]
-    log_csv [label="Registrar Telemetria\nno Arquivo CSV"]
+    read_sensors [label="Leitura dos Sensores\n(LM35, INA219, LDR, API Clima)"]
+    log_csv [label="Registrar Telemetria\n(Arquivo CSV)"]
     
     // Decisão de Temperatura
     dec_temp [label="Temperatura do Painel >\nTemp. Ambiente + Delta?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
-    cool_on [label="Ligar Arrefecimento\n(Bomba em Fluxo Alto)"]
+    cool_on [label="Ligar Arrefecimento\n(Bomba ON)"]
     cool_off [label="Desligar Arrefecimento\n(Bomba OFF)"]
 
     // Decisão de Sujeira
     dec_soil [label="Perda por Soiling >\nLimiar de Sujeira?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
     dec_rain [label="Está Chovendo?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
-    clean_cycle [label="Ciclo de Limpeza Completo\n1. Molhar Placa (Bomba Low por 2s)\n2. Wiper Avança até Fim de Curso\n3. Wiper Retorna até Home\n4. Desligar Motores e Bomba"]
+    clean_cycle [label="Ciclo de Limpeza\n(Aspersão e Rodo)"]
     
     wait_state [label="Aguardar 60 segundos", shape=ellipse, fillcolor="#f1f5f9", color="#64748b"]
 
-    // Conexões
+    // Alinhamento de colunas (Ranks)
+    { rank=same; start; wait_state; }
+    { rank=same; read_sensors; clean_cycle; }
+    { rank=same; log_csv; dec_rain; }
+    { rank=same; dec_temp; dec_soil; }
+
+    // Conexões - Linha Superior (Fluxo Esquerda -> Direita)
     start -> read_sensors;
     read_sensors -> log_csv;
     log_csv -> dec_temp;
-    
-    // Ramo de Temperatura
     dec_temp -> cool_on [label="Sim"];
     dec_temp -> cool_off [label="Não"];
     
+    // Conexão entre Linhas (Fluxo Direita -> Descendente)
     cool_on -> dec_soil;
     cool_off -> dec_soil;
     
-    // Ramo de Sujeira
-    dec_soil -> dec_rain [label="Sim"];
-    dec_soil -> wait_state [label="Não"];
+    // Conexões - Linha Inferior (Fluxo Direita -> Esquerda, usando dir=back)
+    dec_rain -> dec_soil [dir=back, label="Sim"];
+    clean_cycle -> dec_rain [dir=back, label="Não"];
+    wait_state -> clean_cycle [dir=back];
     
-    dec_rain -> clean_cycle [label="Não"];
-    dec_rain -> wait_state [label="Sim (Evita desperdício)"];
+    // Desvios adicionais para a espera
+    wait_state -> dec_soil [dir=back, label="Não"];
+    wait_state -> dec_rain [dir=back, label="Sim (Evita desperdício)"];
     
-    clean_cycle -> wait_state;
-    wait_state -> read_sensors;
+    // Loop de retorno para o início (Fluxo Esquerda -> Ascendente)
+    read_sensors -> wait_state [dir=back];
 }

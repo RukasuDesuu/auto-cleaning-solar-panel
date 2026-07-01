@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.6.30)  30 JUN 2026 20:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.6.30)  1 JUL 2026 20:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -630,40 +630,45 @@ File: wiper_cad.png Graphic file (type png)
 <use wiper_cad.png>
 Package pdftex.def Info: wiper_cad.png  used on input line 67.
 (pdftex.def)             Requested size: 176.407pt x 75.73686pt.
-<diagrama_eletronica.png, id=28, 845.559pt x 597.432pt>
+<diagrama_eletronica.png, id=28, 845.3181pt x 597.432pt>
 File: diagrama_eletronica.png Graphic file (type png)
 <use diagrama_eletronica.png>
 Package pdftex.def Info: diagrama_eletronica.png  used on input line 82.
-(pdftex.def)             Requested size: 227.62204pt x 160.82564pt.
+(pdftex.def)             Requested size: 227.62204pt x 160.87122pt.
  [3 <./frame_cad.png> <./wiper_cad.png>]
-<fluxograma.png, id=36, 561.09625pt x 1021.8175pt>
+<fluxograma.png, id=36, 1394.20876pt x 215.80624pt>
 File: fluxograma.png Graphic file (type png)
 <use fluxograma.png>
-Package pdftex.def Info: fluxograma.png  used on input line 102.
-(pdftex.def)             Requested size: 170.71652pt x 310.8821pt.
- [4 <./diagrama_eletronica.png (PNG copy)> <./fluxograma.png>] [5] (./main.bbl)
- [6] (./main.aux) ) 
+Package pdftex.def Info: fluxograma.png  used on input line 104.
+(pdftex.def)             Requested size: 483.69687pt x 74.86813pt.
+ [4 <./diagrama_eletronica.png (PNG copy)> <./fluxograma.png>]
+Overfull \hbox (21.64398pt too wide) in paragraph at lines 116--117
+[]\T1/lmr/m/n/10.95 Será in-du-zida po-eira ar-ti-fi-cial de forma con-tro-lada
+ e pro-gres-siva so-bre o pai-nel prin-ci-pal, monitorando-
+ []
+
+[5] (./main.bbl) [6] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 7405 strings out of 480227
- 117620 string characters out of 5895370
- 437981 words of memory out of 5000000
- 25184 multiletter control sequences out of 15000+600000
+ 7413 strings out of 480227
+ 117768 string characters out of 5895370
+ 437041 words of memory out of 5000000
+ 25192 multiletter control sequences out of 15000+600000
  516577 words of font info for 66 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 60i,15n,65p,1268b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sha
-re/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/
-lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/
-fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</
-usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/
-public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/s
-hare/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8
-.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/t
-ype1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></
-usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on main.pdf (6 pages, 1633018 bytes).
+ 60i,15n,65p,1350b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-math
+sy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fon
+ts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/
+usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips
+/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/te
+xmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+ex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/
+lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
+Output written on main.pdf (6 pages, 1783720 bytes).
 PDF statistics:
  111 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream

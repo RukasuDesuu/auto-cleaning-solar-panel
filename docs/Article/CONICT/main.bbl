@@ -5,12 +5,6 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
-\bibitem[{ASCM Project Contributors} 2026]{telemetrix_ref}
-\abntrefinfo{{ASCM Project Contributors}}{{ASCM Project Contributors}}{2026}
-{{ASCM Project Contributors}. \emph{Firmware do Dashboard e Integração
-  Telemetrix}. 2026. \url{firmware/dashboard/backend/hardware.py}.
-Acesso em: 03 jun. 2026.}
-
 \bibitem[Derakhshandeh et al. 2021]{derakhshandeh2021}
 \abntrefinfo{Derakhshandeh et al.}{DERAKHSHANDEH et al.}{2021}
 {DERAKHSHANDEH, J.~F. et al. A comprehensive review of automatic cleaning
@@ -50,5 +44,23 @@ Acesso em: 24 mar. 2026.}
   methods.
 \emph{Renewable and Sustainable Energy Reviews}, Elsevier, v.~212, p. 115394,
   2025.}
+
+\bibitem[Ram{\'i}rez 2026]{fastapi_doc}
+\abntrefinfo{Ram{\'i}rez}{RAM{\'I}REZ}{2026}
+{RAM{\'I}REZ, S. \emph{FastAPI Framework Documentation}. 2026.
+  \url{https://fastapi.tiangolo.com/}.
+Acesso em: 24 mar. 2026.}
+
+\bibitem[{Streamlit Inc.} 2026]{streamlit_doc}
+\abntrefinfo{{Streamlit Inc.}}{{Streamlit Inc.}}{2026}
+{{Streamlit Inc.} \emph{Streamlit Documentation}. 2026.
+  \url{https://docs.streamlit.io/}.
+Acesso em: 24 mar. 2026.}
+
+\bibitem[Yorinks 2026]{telemetrix_doc}
+\abntrefinfo{Yorinks}{YORINKS}{2026}
+{YORINKS, A. \emph{The Telemetrix Project Documentation}. 2026.
+  \url{https://github.com/MrYsLab/telemetrix}.
+Acesso em: 24 mar. 2026.}
 
 \end{thebibliography}
