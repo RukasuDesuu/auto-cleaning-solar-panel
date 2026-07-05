@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.7)  5 JUL 2026 08:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.7.5)  5 JUL 2026 20:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**./main.tex
-(main.tex
+**main.tex
+(./main.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-11-06>
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+L3 programming layer <2026-01-19>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+(/usr/share/texmf-dist/tex/latex/base/size11.clo
 File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count275
@@ -23,64 +23,50 @@ File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
-)
-(preambulo.tex
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2025/11/09 v25.15 The multilingual framework for LuaLaTeX, pdfLa
-TeX and XeLaTeX
+) (./preambulo.tex
+(/usr/share/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2026/02/14 v26.3 The multilingual framework for LuaLaTeX, pdfLaT
+eX and XeLaTeX
 \babel@savecnt=\count283
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
-ne 2050.
+ne 2078.
 LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
-ne 2052.
+ne 2080.
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
-e 2054.
+e 2082.
 LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
-e 2055.
+e 2083.
 LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
-on input line 2056.
+on input line 2084.
 LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
-on input line 2058.
+on input line 2086.
 LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
-on input line 2083.
+on input line 2111.
 \U@D=\dimen149
-\l@unhyphenated=\language79
+\l@unhyphenated=\language4
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+(/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count284
-Package babel Info: Configuration files are deprecated, as
-(babel)             they can break document portability.
-(babel)             Reported on input line 4175.
 
-*************************************
-* Local config file bblopts.cfg used
-*
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/invalid\
-babel-brazil.tex)
+(/usr/share/texmf-dist/tex/generic/babel/locale/invalid/babel-brazil.tex)
 
 Package babel Warning: Name 'brazil' is deprecated.
 (babel)                Use 'brazilian' instead.
-(babel)                Reported on input line 4298.
+(babel)                Reported on input line 4330.
 
 Package babel Info: Importing font and identification data for brazil
-(babel)             from babel-pt-BR.ini. Reported on input line 4298.
-
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/babel-portuges\brazilia
-n.ldf
-Language: portuges 2021/07/09 v1.2t Portuguese support from the babel system
+(babel)             from babel-pt-BR.ini. Reported on input line 4330.
+(/usr/share/texmf-dist/tex/generic/babel-portuges/brazilian.ldf
+Language: portuges 2026/01/24 v1.2u Portuguese support from the babel system
 Package babel Info: Hyphen rules for 'brazil' set to \l@portuguese
-(babel)             (\language56). Reported on input line 111.
-Package babel Info: Making " an active character on input line 143.
+(babel)             (\language3). Reported on input line 100.
+Package babel Info: Making " an active character on input line 132.
 ))
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty
+(/usr/share/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -115,43 +101,42 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen150
 \Gin@req@width=\dimen151
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+(/usr/share/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 \Gm@cnth=\count285
@@ -166,21 +151,21 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layouthoffset=\dimen158
 \Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks20
-
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/tools\enumerate.sty
+)
+(/usr/share/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
 \@enLab=\toks21
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+(/usr/share/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2cite.sty
+(/usr/share/texmf-dist/tex/latex/abntex2/abntex2cite.sty
 Package: abntex2cite 2018/11/24 v-1.9.7 abnTeX2
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+(/usr/share/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count288
 \calc@Bcount=\count289
@@ -193,8 +178,8 @@ LaTeX Info: Redefining \addtolength on input line 87.
 \calc@Ccount=\count290
 \calc@Cskip=\skip53
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2abrev.st
-y) (C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+(/usr/share/texmf-dist/tex/latex/abntex2/abntex2abrev.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -203,13 +188,13 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \c@ABCIaux=\count291
 \c@ABCImax=\count292
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifpdf.sty
+(/usr/share/texmf-dist/tex/generic/iftex/ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifxetex.sty
+(/usr/share/texmf-dist/tex/generic/iftex/ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
+(/usr/share/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
 \biblabelsep=\skip56
@@ -217,14 +202,15 @@ LaTeX Info: Redefining \newblock on input line 591.
 LaTeX Info: Redefining \cite on input line 618.
 \ABCItoken=\toks22
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -234,18 +220,19 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-) (C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/comment\comment.sty
+)
+(/usr/share/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write3
 
 Excluding comment 'comment')
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip57
 \multirow@cntb=\count293
 \multirow@dima=\skip58
 \bigstrutjot=\dimen162
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+(/usr/share/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
 \c@tracingmulticols=\count294
 \mult@box=\box53
@@ -316,27 +303,27 @@ Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
 \mc@col@check@num=\count303
 \g__mc_curr_col_int=\count304
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
+(/usr/share/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip61
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks23
 \ex@=\dimen172
 ))
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen173
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count305
@@ -387,7 +374,7 @@ LaTeX Info: Redefining \Relbar on input line 970.
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks28
 \thm@bodyfont=\toks29
@@ -399,7 +386,7 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip66
 \dth@everypar=\toks33
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -407,12 +394,13 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mathtools.sty
+(/usr/share/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
+
+(/usr/share/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
 \g_MT_multlinerow_int=\count317
@@ -427,9 +415,10 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \xmathstrut@box=\box101
 \xmathstrut@dim=\dimen188
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
+(/usr/share/texmf-dist/tex/latex/blindtext/blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+
+(/usr/share/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 \c@blindtext=\count318
@@ -451,7 +440,7 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@pangramcount=\count334
 \c@blind@pangrammax=\count335
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/sectsty\sectsty.sty
+(/usr/share/texmf-dist/tex/latex/sectsty/sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
 les
 
@@ -463,11 +452,11 @@ LaTeX Warning: Command \underbar  has changed.
 LaTeX Warning: Command \underline  has changed.
                Check if current package is valid.
 
-)
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/titlecaps\titlecaps.sty
+) (/usr/share/texmf-dist/tex/latex/titlecaps/titlecaps.sty
 Package: titlecaps 2022/04/12\ 1.3\ Routines for setting rich-text input into T
 itling Caps
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/ifnextok\ifnextok.sty
+
+(/usr/share/texmf-dist/tex/latex/ifnextok/ifnextok.sty
 Package: ifnextok 2011/06/27 v0.3 test next token (UL)
 )
 \c@lcword@index=\count336
@@ -475,8 +464,8 @@ Package: ifnextok 2011/06/27 v0.3 test next token (UL)
 \c@lc@words=\count338
 \c@dia@count=\count339
 \c@arg@@@index=\count340
-)) (C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.st
-y
+))
+(/usr/share/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
 \f@nch@headwidth=\skip68
@@ -497,14 +486,14 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 )
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 19
 .
- (C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+
+(/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count341
-) (main.aux
+) (./main.aux
 Package babel Info: 'brazil' activates 'portuges' shorthands.
 (babel)             Reported on input line 6.
 )
@@ -525,8 +514,7 @@ LaTeX Font Info:    ... okay on input line 19.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
-ii
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count342
 \scratchdimen=\dimen189
@@ -539,16 +527,14 @@ ii
 \MPnumerator=\count346
 \makeMPintoPDFobject=\count347
 \everyMPtoPDFconversion=\toks36
-)
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
-ase.sty
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
-fg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -584,29 +570,28 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(cabecalho.tex
+(./cabecalho.tex
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
 2.
-
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+ (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
 2.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+(/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
 22.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+(/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
 22.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+(/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -618,13 +603,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    Trying to load font information for U+msa on input line 22.
 
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 22.
 
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 <logo_conict.png, id=1, 493.845pt x 296.307pt>
@@ -640,7 +625,7 @@ Package pdftex.def Info: logo_reitoria.png  used on input line 22.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 2.
 
-(C:\Users\pauli\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+(/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -667,77 +652,75 @@ P, Câm-pus São José dos Cam-pos, paulo.rangel@aluno.ifsp.edu.br.
 
 ) [1
 
-{C:/Users/pauli/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/paul
-i/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/pauli/Ap
-pData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/pauli/AppDa
-ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc} <./logo_conict.png> <./l
-ogo_reitoria.png>]
-<../images/grafico_ember.png, id=18, 787.94376pt x 524.96124pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
+/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/
+usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./logo_conict.png> <./logo_
+reitoria.png>]
+<../images/grafico_ember.png, id=19, 787.94376pt x 524.96124pt>
 File: ../images/grafico_ember.png Graphic file (type png)
 <use ../images/grafico_ember.png>
 Package pdftex.def Info: ../images/grafico_ember.png  used on input line 49.
 (pdftex.def)             Requested size: 170.71652pt x 113.73758pt.
-<../images/grafico_soiling.jpg, id=19, 145.0234pt x 93.05669pt>
+<../images/grafico_soiling.jpg, id=20, 145.0234pt x 93.05669pt>
 File: ../images/grafico_soiling.jpg Graphic file (type jpg)
 <use ../images/grafico_soiling.jpg>
 Package pdftex.def Info: ../images/grafico_soiling.jpg  used on input line 51.
 (pdftex.def)             Requested size: 156.49014pt x 100.41878pt.
- [2{C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.e
-nc} <../images/grafico_ember.png> <../images/grafico_soiling.jpg>]
-<../images/vista_explodida.png, id=25, 1088.56688pt x 548.80031pt>
+ [2{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <../images/grafico_
+ember.png> <../images/grafico_soiling.jpg>]
+<../images/vista_explodida.png, id=26, 1088.56688pt x 548.80031pt>
 File: ../images/vista_explodida.png Graphic file (type png)
 <use ../images/vista_explodida.png>
 Package pdftex.def Info: ../images/vista_explodida.png  used on input line 69.
-(pdftex.def)             Requested size: 227.62204pt x 114.74902pt.
-<../images/diagrama_eletronica.png, id=26, 845.3181pt x 597.432pt>
+(pdftex.def)             Requested size: 312.9803pt x 157.78304pt.
+<../images/diagrama_eletronica.png, id=27, 845.3181pt x 597.432pt>
 File: ../images/diagrama_eletronica.png Graphic file (type png)
 <use ../images/diagrama_eletronica.png>
 Package pdftex.def Info: ../images/diagrama_eletronica.png  used on input line 
 84.
 (pdftex.def)             Requested size: 227.62204pt x 160.87122pt.
- [3{C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.e
-nc} <../images/vista_explodida.png>]
-<../images/fluxograma.png, id=33, 1394.20876pt x 215.80624pt>
+ [3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <../images/vista_ex
+plodida.png>]
+<../images/fluxograma.png, id=35, 1394.20876pt x 215.80624pt>
 File: ../images/fluxograma.png Graphic file (type png)
 <use ../images/fluxograma.png>
 Package pdftex.def Info: ../images/fluxograma.png  used on input line 106.
 (pdftex.def)             Requested size: 483.69687pt x 74.86813pt.
- [4{C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.e
-nc} <../images/diagrama_eletronica.png (PNG copy)> <../images/fluxograma.png>]
+
+[4{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <../images/diagrama_
+eletronica.png (PNG copy)> <../images/fluxograma.png>]
 Overfull \hbox (21.64398pt too wide) in paragraph at lines 118--119
 []\T1/lmr/m/n/10.95 Será in-du-zida po-eira ar-ti-fi-cial de forma con-tro-lada
  e pro-gres-siva so-bre o pai-nel prin-ci-pal, monitorando-
  []
 
-[5] (main.bbl) [6] (main.aux)
+[5] (./main.bbl) [6] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-11-06>
+L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 7822 strings out of 467871
- 128775 string characters out of 5418376
- 565319 words of memory out of 5000000
- 36523 multiletter control sequences out of 15000+600000
+ 7818 strings out of 469495
+ 124434 string characters out of 5470099
+ 560845 words of memory out of 5000000
+ 36305 multiletter control sequences out of 15000+600000
  675039 words of font info for 78 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 62i,15n,68p,1352b,479s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pf
-b><C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pf
-b><C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pf
-b><C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pf
-b><C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb
-><C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb>
-<C:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C
-:/Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/
-Users/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Us
-ers/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Us
-ers/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Us
-ers/pauli/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on main.pdf (6 pages, 1600174 bytes).
+ 16 hyphenation exceptions out of 8191
+ 62i,15n,68p,1350b,479s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf-dis
+t/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm
+/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/share
+/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/
+public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr
+/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri10.pfb
+></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist
+/fonts/type1/public/lm/lmsy8.pfb>
+Output written on main.pdf (6 pages, 1581387 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

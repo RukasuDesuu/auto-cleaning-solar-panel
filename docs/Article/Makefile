@@ -7,6 +7,8 @@ all: build clean-temp
 
 build:
 	-$(TEX) $(FLAGS) $(PROJECT).tex
+	-$(BIBTEX) $(PROJECT)
+	-$(TEX) $(FLAGS) $(PROJECT).tex
 	-$(TEX) $(FLAGS) $(PROJECT).tex
 
 clean-temp:
