@@ -121,35 +121,22 @@ A alimentação de energia da ponte H é provida de forma externa por uma fonte 
 
 O design estrutural e o mecanismo de movimentação linear do ASCM foram totalmente modelados utilizando o software de CAD tridimensional Autodesk Inventor, visando a prototipagem rápida através da fabricação por manufatura aditiva (impressão 3D por deposição de material fundido - FDM). O design mecânico compreende a modelagem dos seguintes componentes principais:
 \begin{itemize}
-    \item \textbf{Chassi Estrutural (Frame):} Estrutura que suporta os dois painéis solares em um ângulo de inclinação fixo otimizado para a irradiância solar da região geográfica e para o escoamento de água por gravidade.
-    \item \textbf{Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):} Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (\textit{Gear-Rack}) é fixada ao longo das guias lineares do frame, e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
+    \item \textbf{Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):} Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (\textit{Gear-Rack}) é fixada ao longo do trilho de deslizamento, e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
     \item \textbf{Suporte do Rodo (Wiper Support):} Peça personalizada que aloja o motor de tração com redução e fixa a haste do rodo de silicone contra a superfície do vidro do painel principal, garantindo uma pressão de contato uniforme para a varredura da poeira.
     \item \textbf{Suporte de Aspersão (Sprinkler Support):} Fixadores posicionados no topo do painel que sustentam a tubulação hidráulica e os bicos aspersores orientados em ângulo que maximiza a área de cobertura da lâmina d'água na superfície.
-    \item \textbf{Suportes dos Painéis (Panel Support):} Peças de interface que prendem os módulos fotovoltaicos de forma rígida ao frame estrutural principal.
+    \item \textbf{Suportes dos Painéis (Panel Support):} Peças de interface que prendem os módulos fotovoltaicos de forma rígida à estrutura de suporte principal.
 \end{itemize}
-A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. O modelo tridimensional do chassi completo, o segmento da cremalheira linear e o suporte do rodo motorizado estão ilustrados nas Figuras \ref{fig:frame_cad}, \ref{fig:cremalheira_cad} e \ref{fig:wiper_cad}.
+A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. A vista explodida da montagem, evidenciando o encaixe entre a cremalheira linear, o pinhão e o suporte do rodo motorizado, está ilustrada na Figura \ref{fig:vista_explodida}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.55\textwidth]{images/frame_cad.png}
-    \caption{Modelo tridimensional (CAD) do chassi estrutural (Frame) completo do ASCM no Autodesk Inventor.}
-    \label{fig:frame_cad}
-    \centerline{\small Fonte: Elaborado pelos autores.}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.55\textwidth]{images/cremalheira_cad.png}
-    \caption{Detalhe da cremalheira linear (Gear Rack) projetada em CAD.}
-    \label{fig:cremalheira_cad}
-    \centerline{\small Fonte: Elaborado pelos autores.}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.55\textwidth]{images/wiper_cad.png}
-    \caption{Modelo tridimensional do suporte do rodo motorizado (Wiper Support) e acoplamento do motor com o pinhão.}
-    \label{fig:wiper_cad}
+    \IfFileExists{images/vista_explodida.png}{%
+        \includegraphics[width=0.7\textwidth]{images/vista_explodida.png}%
+    }{%
+        \fbox{\parbox[c][6cm][c]{0.7\textwidth}{\centering\textit{Vista explodida da montagem (pendente)}}}%
+    }
+    \caption{Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (\textit{Gear-Rack}); (2) Pinhão (\textit{Gear}); (3) Suporte do Rodo (\textit{Wiper Support}); (4) Suporte de Aspersão (\textit{Sprinkler}); (5) Suporte dos Painéis (\textit{Panel Support}).}
+    \label{fig:vista_explodida}
     \centerline{\small Fonte: Elaborado pelos autores.}
 \end{figure}
 
@@ -205,7 +192,7 @@ Durante as simulações do software de controle, as rotinas de callback do Telem
 
 \subsection{Metodologia para Ensaio Físico e Acúmulo de Poeira (\textit{Soiling})}
 
-Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de levantar a curva de diminuição da eficiência energética devido ao acúmulo de sujeira. O procedimento do ensaio seguirá as seguintes etapas:
+Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de levantar a curva de diminuição da eficiência energética devido ao acúmulo de sujeira. Este ensaio de campo, de longo prazo (30 dias) e sujeira natural, representa a validação definitiva do sistema em condições reais de operação, e é complementar ao ensaio de curto prazo em ambiente controlado com luz artificial e sujeira induzida, conduzido como validação preliminar do laço de automação. O procedimento do ensaio seguirá as seguintes etapas:
 \begin{enumerate}
     \item Ambos os painéis (principal e referência) serão instalados externamente em suporte ajustável, expostos sob as mesmas condições de inclinação, orientação geográfica e sombreamento.
     \item No dia inicial ($t=0$), ambos os painéis serão limpos manualmente com água deionizada para garantir calibração inicial idêntica ($P_{main} \approx P_{ref}$).
@@ -247,43 +234,7 @@ O protótipo do ASCM projetado demonstrou-se viável sob o aspecto de desenvolvi
 
 Os próximos passos deste trabalho consistem no término do acoplamento mecânico estrutural do rodo impresso em 3D no painel solar físico e no início imediato dos ensaios de degradação por sujidade de 30 dias e testes térmicos. Espera-se com esses testes validar a eficácia prática da aspersão com raspagem mecânica na remoção de poeira consolidada (\textit{hard scale}) e no ganho líquido anual de geração elétrica do sistema.
 
-\begin{thebibliography}{99}
-
-\bibitem{ember_eu_2026}
-EMBER.
-\textit{European Electricity Review 2026}.
-Disponível em: \url{https://ember-energy.org/latest-insights/european-electricity-review-2026/}. Acesso em: 24 mar. 2026.
-
-\bibitem{ember_brazil_2024}
-EMBER.
-\textit{Wind and solar generate over a third of Brazil's electricity for the first month on record}.
-Disponível em: \url{https://ember-energy.org/latest-insights/wind-and-solar-generate-over-a-third-of-brazils-electricity-for-the-first-month-on-record/}. Acesso em: 24 mar. 2026.
-
-\bibitem{geetha2024}
-GEETHA, A.; USHA, S.; SANTHAKUMAR, J.; PALANISAMY, R.; SARAWAGI, R.; SINGH, A. 
-Solar Panel Self-Cleaning Mechanisms and Its Effect on the Economic and Environmental Sustainability. 
-\textit{Journal of Electrical and Computer Engineering}, Hindawi, vol. 2024, Article ID 7726716, 2024.
-
-\bibitem{qi2025}
-QI, Jiacheng; DONG, Qichang; SONG, Ye; ZHAO, Xiaoqing; SHI, Long.
-Combining dust scaling behaviors of PV panels and water cleaning methods. 
-\textit{Renewable and Sustainable Energy Reviews}, Elsevier, vol. 212, 115394, 2025.
-
-\bibitem{cavalcante2016}
-CAVALCANTE, M. M.; MARCELINO, J. E. C.; DELGADO, D. B. M.; VIANA, E. C.
-Protótipo de um sistema automatizado para higienização de painéis solares planos agrupado a um sistema de reaproveitamento de água. 
-In: \textit{Anais do V SINGEP}, São Paulo – SP, Brasil, 2016.
-
-\bibitem{electronics_guide}
-ASCM Project Contributors.
-\textit{Guia de Hardware Eletrônico - Instruções de Montagem}.
-Disponível em: \url{hardware/Electronics/electronics.md}. Acesso em: 03 jun. 2026.
-
-\bibitem{telemetrix_ref}
-ASCM Project Contributors.
-\textit{Firmware do Dashboard e Integração Telemetrix}.
-Disponível em: \url{firmware/dashboard/backend/hardware.py}. Acesso em: 03 jun. 2026.
-
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{CONICT/bibliografia}
 
 \end{document}
