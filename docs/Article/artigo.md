@@ -127,7 +127,7 @@ Durante as simulações do software de controle, as rotinas de callback do Telem
 
 ### 4.2 Metodologia para Ensaio Físico e Acúmulo de Poeira (*Soiling*)
 
-Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de levantar a curva de diminuição da eficiência energética devido ao acúmulo de sujeira. O procedimento do ensaio seguirá as seguintes etapas:
+Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de levantar a curva de diminuição da eficiência energética devido ao acúmulo de sujeira. Este ensaio de campo, de longo prazo (30 dias) e sujeira natural, representa a validação definitiva do sistema em condições reais de operação, e é complementar ao ensaio de curto prazo em ambiente controlado com luz artificial e sujeira induzida, conduzido como validação preliminar do laço de automação. O procedimento do ensaio seguirá as seguintes etapas:
 1.  Ambos os painéis (principal e referência) serão instalados externamente em suporte ajustável, expostos sob as mesmas condições de inclinação, orientação geográfica e sombreamento.
 2.  No dia inicial ($t=0$), ambos os painéis serão limpos manualmente com água deionizada para garantir calibração inicial idêntica ($P_{main} \approx P_{ref}$).
 3.  O painel de referência será mantido sob exposição ao acúmulo natural de poeira local por um período contínuo de 30 dias, sem passar por nenhum ciclo de limpeza automática.
