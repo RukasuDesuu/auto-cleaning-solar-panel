@@ -58,14 +58,16 @@ Além disso, para cada grau Celsius acrescido à superfície do silício acima d
 
 O protótipo do sistema ASCM foi desenvolvido utilizando componentes comerciais de prateleira (COTS - \textit{Commercial Off-The-Shelf}) para manter o baixo custo de fabricação. O design estrutural e o mecanismo de movimentação linear foram modelados no software Autodesk Inventor, visando a prototipagem rápida através da fabricação por impressão 3D por deposição de material fundido (FDM). 
 
-Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de impressão, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas. A cremalheira linear (\textit{Gear-Rack}) é fixada ao longo das guias lineares do frame e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo de silicone através da peça de suporte do motor e do rodo (\textit{Wiper Support}), conforme o design CAD tridimensional completo (Figura \ref{fig:cad_design}).
+Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de impressão, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas. A cremalheira linear (\textit{Gear-Rack}) é fixada ao longo das guias lineares do trilho de deslizamento e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo de silicone através da peça de suporte do motor e do rodo (\textit{Wiper Support}), conforme o design CAD tridimensional em vista explodida (Figura \ref{fig:cad_design}).
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=6.2cm]{frame_cad.png}
-    \hspace{0.5cm}
-    \includegraphics[width=6.2cm]{wiper_cad.png}
-    \caption{Modelos tridimensionais (CAD) do ASCM: chassi estrutural completo (esquerda) e detalhe do suporte do rodo motorizado (direita). Fonte: Elaborado pelos autores.}
+    \IfFileExists{../images/vista_explodida.png}{%
+        \includegraphics[width=8cm]{vista_explodida.png}%
+    }{%
+        \fbox{\parbox[c][5cm][c]{8cm}{\centering\textit{Vista explodida da montagem (pendente)}}}%
+    }
+    \caption{Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (\textit{Gear-Rack}); (2) Pinhão (\textit{Gear}); (3) Suporte do Rodo (\textit{Wiper Support}); (4) Suporte de Aspersão (\textit{Sprinkler}); (5) Suporte dos Painéis (\textit{Panel Support}). Fonte: Elaborado pelos autores.}
     \label{fig:cad_design}
     \vspace{-0.3cm}
 \end{figure}

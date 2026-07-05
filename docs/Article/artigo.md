@@ -63,7 +63,7 @@ O protótipo do sistema ASCM foi desenvolvido utilizando componentes comerciais 
 
 ### 3.1 Especificação e Arquitetura de Hardware
 
-O hardware eletrônico está centrado no microcontrolador Arduino Uno R3. A pinagem completa e o barramento do protótipo estão estruturados conforme detalhado no [Guia de Hardware Eletrônico](file:///home/lucasekroth/Public/Projeto_Integrador/auto-cleaning-solar-panel/hardware/Electronics/electronics.md). As conexões principais consistem em:
+O hardware eletrônico está centrado no microcontrolador Arduino Uno R3. A pinagem completa e o barramento do protótipo estão estruturados conforme detalhado no [Guia de Hardware Eletrônico](../../hardware/Electronics/electronics.md). As conexões principais consistem em:
 *   **Aquisição de Potência Elétrica (Sensores INA219):** Dois módulos INA219 integrados via barramento de comunicação $I^2C$ realizam a medição de corrente e tensão. O sensor principal (endereço original `0x40`) monitora o painel limpo pelo sistema. O segundo sensor (endereço `0x41`, configurado via ponte de solda no pino de endereço A0) monitora o painel de referência, que permanecerá exposto ao acúmulo de sujeira natural. Ambas as saídas dos painéis são aplicadas sobre resistores de carga de $33\ \Omega$ (potência $\ge 1.5\text{W}$) para simular o consumo constante de carga.
 *   **Sensoriamento de Condições Ambientais:** Um sensor analógico de luz (LDR) associado a um divisor de tensão de $10\text{ k}\Omega$ é lido pela porta analógica A0 para estimar a irradiância luminosa relativa. A medição térmica da superfície do painel é realizada por meio de um termopar LM35 montado na face traseira do painel, lido pela porta analógica A1.
 *   **Atuadores Eletromecânicos:** O rodo mecânico é movido linearmente por um motor de corrente contínua (DC) acoplado a uma redução mecânica. O acionamento da velocidade do motor é feito via sinal PWM pelo pino 11, e o sentido de movimentação é comandado pelos pinos digitais 9 e 10 de um driver Ponte H L298N. Chaves fim de curso do tipo *micro-switch* estão instaladas no início (pino digital 2, *Home*) e fim (pino digital 3, *End*) do trilho de deslizamento.
@@ -77,30 +77,24 @@ A alimentação de energia da ponte H é provida de forma externa por uma fonte 
 ### 3.2 Design Mecânico e Modelagem 3D
 
 O design estrutural e o mecanismo de movimentação linear do ASCM foram totalmente modelados utilizando o software de CAD tridimensional Autodesk Inventor, visando a prototipagem rápida através da fabricação por manufatura aditiva (impressão 3D por deposição de material fundido - FDM). O design mecânico compreende a modelagem dos seguintes componentes principais:
-*   **Chassi Estrutural (Frame):** Estrutura que suporta os dois painéis solares em um ângulo de inclinação fixo otimizado para a irradiância solar da região geográfica e para o escoamento de água por gravidade.
-*   **Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):** Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (`Gear-Rack`) é fixada ao longo das guias lineares do frame, e o pinhão (`Gear` acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
+*   **Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):** Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (`Gear-Rack`) é fixada ao longo do trilho de deslizamento, e o pinhão (`Gear` acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
 *   **Suporte do Rodo (Wiper Support):** Peça personalizada que aloja o motor de tração com redução e fixa a haste do rodo de silicone contra a superfície do vidro do painel principal, garantindo uma pressão de contato uniforme para a varredura da poeira.
 *   **Suporte de Aspersão (Sprinkler Support):** Fixadores posicionados no topo do painel que sustentam a tubulação hidráulica e os bicos aspersores orientados em ângulo que maximiza a área de cobertura da lâmina d'água na superfície.
-*   **Suportes dos Painéis (Panel Support):** Peças de interface que prendem os módulos fotovoltaicos de forma rígida ao frame estrutural principal.
+*   **Suportes dos Painéis (Panel Support):** Peças de interface que prendem os módulos fotovoltaicos de forma rígida à estrutura de suporte principal.
 
-A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. O modelo tridimensional do chassi completo, o segmento da cremalheira linear e o suporte do rodo motorizado estão ilustrados nas Figuras 4, 5 e 6.
+A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. A vista explodida da montagem, evidenciando o encaixe entre a cremalheira linear, o pinhão e o suporte do rodo motorizado, está ilustrada na Figura 4.
 
-![Modelo 3D do Chassi](images/frame_cad.png)
-*Figura 4: Modelo tridimensional (CAD) do chassi estrutural (Frame) completo do ASCM no Autodesk Inventor. Fonte: Elaborada pelos autores.*
-
-![Detalhe da Cremalheira](images/cremalheira_cad.png)
-*Figura 5: Detalhe da cremalheira linear (Gear Rack) projetada em CAD. Fonte: Elaborada pelos autores.*
-
-![Modelo do Wiper Support](images/wiper_cad.png)
-*Figura 6: Modelo tridimensional do suporte do rodo motorizado (Wiper Support) e acoplamento do motor com o pinhão. Fonte: Elaborada pelos autores.*
+![Vista Explodida da Montagem](images/vista_explodida.png)
+*Figura 4: Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (Gear-Rack); (2) Pinhão (Gear); (3) Suporte do Rodo (Wiper Support); (4) Suporte de Aspersão (Sprinkler); (5) Suporte dos Painéis (Panel Support). Fonte: Elaborada pelos autores.*
+*(Imagem pendente — ver `hardware/CAD/` para as peças soltas até a montagem em Inventor ser concluída.)*
 
 ### 3.3 Arquitetura do Software e Comunicação
 
-Ao contrário de abordagens convencionais com firmware C/C++ estático compilado no Arduino, o ASCM adota a arquitetura **Telemetrix** ([hardware.py](file:///home/lucasekroth/Public/Projeto_Integrador/auto-cleaning-solar-panel/firmware/dashboard/backend/hardware.py)). O Arduino Uno executa o sketch padrão *Telemetrix4Arduino*, operando puramente como um dispositivo escravo de entrada e saída (servidor de I/O) que se comunica via porta serial com um computador hospedeiro. 
+Ao contrário de abordagens convencionais com firmware C/C++ estático compilado no Arduino, o ASCM adota a arquitetura **Telemetrix** ([hardware.py](../../firmware/dashboard/backend/hardware.py)). O Arduino Uno executa o sketch padrão *Telemetrix4Arduino*, operando puramente como um dispositivo escravo de entrada e saída (servidor de I/O) que se comunica via porta serial com um computador hospedeiro. 
 
 Toda a lógica de controle complexa, o tratamento matemático e os logs são implementados na linguagem Python no computador servidor:
-1.  **Backend (FastAPI):** Desenvolve o controle centralizado de eventos e automatiza o laço periódico ([main.py](file:///home/lucasekroth/Public/Projeto_Integrador/auto-cleaning-solar-panel/firmware/dashboard/backend/main.py)). Ele atualiza leituras analógicas e digitais usando callbacks rápidos implementados no Telemetrix, e interroga os sensores $I^2C$ de potência INA219. O laço síncrono também interage com uma API de meteorologia online para coletar a temperatura ambiente local e checar a incidência de chuvas no momento. Os logs de telemetria e eventos são exportados periodicamente para arquivos CSV estruturados.
-2.  **Frontend (Streamlit):** Provê uma interface web simplificada para o monitoramento instantâneo do sistema ([app.py](file:///home/lucasekroth/Public/Projeto_Integrador/auto-cleaning-solar-panel/firmware/dashboard/frontend/app.py)). O dashboard apresenta de forma intuitiva as grandezas elétricas de geração (tensão, corrente, potência), a temperatura da superfície e a diferença percentual de rendimento devido ao *soiling*, além de permitir comandos manuais de emergência (parada total, ativação forçada de bomba ou motor).
+1.  **Backend (FastAPI):** Desenvolve o controle centralizado de eventos e automatiza o laço periódico ([main.py](../../firmware/dashboard/backend/main.py)). Ele atualiza leituras analógicas e digitais usando callbacks rápidos implementados no Telemetrix, e interroga os sensores $I^2C$ de potência INA219. O laço síncrono também interage com uma API de meteorologia online para coletar a temperatura ambiente local e checar a incidência de chuvas no momento. Os logs de telemetria e eventos são exportados periodicamente para arquivos CSV estruturados.
+2.  **Frontend (Streamlit):** Provê uma interface web simplificada para o monitoramento instantâneo do sistema ([app.py](../../firmware/dashboard/frontend/app.py)). O dashboard apresenta de forma intuitiva as grandezas elétricas de geração (tensão, corrente, potência), a temperatura da superfície e a diferença percentual de rendimento devido ao *soiling*, além de permitir comandos manuais de emergência (parada total, ativação forçada de bomba ou motor).
 
 ### 3.4 Estratégia do Laço de Controle Automatizado
 
@@ -116,10 +110,10 @@ A estratégia de automação funciona em ciclo contínuo em segundo plano e adot
     *   Breve pausa de 1 segundo e subsequente reversão do motor na direção contrária (*backward*) até pressionar a chave fim de curso inicial (*limit_home*).
     *   Desligamento do motor e da bomba hidráulica, retornando o sistema ao monitoramento em malha fechada.
 
-A lógica de funcionamento integrada de controle periódico, monitoramento de limites e acionamentos automáticos baseados nas decisões térmicas e de sujeira é apresentada no fluxograma de controle da Figura 7.
+A lógica de funcionamento integrada de controle periódico, monitoramento de limites e acionamentos automáticos baseados nas decisões térmicas e de sujeira é apresentada no fluxograma de controle da Figura 5.
 
 ![Fluxograma de Controle](images/fluxograma.png)
-*Figura 7: Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM. Fonte: Elaborada pelos autores.*
+*Figura 5: Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM. Fonte: Elaborada pelos autores.*
 
 ---
 

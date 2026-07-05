@@ -121,35 +121,22 @@ A alimentação de energia da ponte H é provida de forma externa por uma fonte 
 
 O design estrutural e o mecanismo de movimentação linear do ASCM foram totalmente modelados utilizando o software de CAD tridimensional Autodesk Inventor, visando a prototipagem rápida através da fabricação por manufatura aditiva (impressão 3D por deposição de material fundido - FDM). O design mecânico compreende a modelagem dos seguintes componentes principais:
 \begin{itemize}
-    \item \textbf{Chassi Estrutural (Frame):} Estrutura que suporta os dois painéis solares em um ângulo de inclinação fixo otimizado para a irradiância solar da região geográfica e para o escoamento de água por gravidade.
-    \item \textbf{Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):} Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (\textit{Gear-Rack}) é fixada ao longo das guias lineares do frame, e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
+    \item \textbf{Mecanismo de Transmissão por Pinhão e Cremalheira (Gear and Rack):} Para evitar deslizamentos mecânicos comuns em transmissões por polia e correia sob condições de umidade e exposição direta a respingos de água, o sistema adota um mecanismo de pinhão e cremalheira. A cremalheira (\textit{Gear-Rack}) é fixada ao longo do trilho de deslizamento, e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo.
     \item \textbf{Suporte do Rodo (Wiper Support):} Peça personalizada que aloja o motor de tração com redução e fixa a haste do rodo de silicone contra a superfície do vidro do painel principal, garantindo uma pressão de contato uniforme para a varredura da poeira.
     \item \textbf{Suporte de Aspersão (Sprinkler Support):} Fixadores posicionados no topo do painel que sustentam a tubulação hidráulica e os bicos aspersores orientados em ângulo que maximiza a área de cobertura da lâmina d'água na superfície.
-    \item \textbf{Suportes dos Painéis (Panel Support):} Peças de interface que prendem os módulos fotovoltaicos de forma rígida ao frame estrutural principal.
+    \item \textbf{Suportes dos Painéis (Panel Support):} Peças de interface que prendem os módulos fotovoltaicos de forma rígida à estrutura de suporte principal.
 \end{itemize}
-A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. O modelo tridimensional do chassi completo, o segmento da cremalheira linear e o suporte do rodo motorizado estão ilustrados nas Figuras \ref{fig:frame_cad}, \ref{fig:cremalheira_cad} e \ref{fig:wiper_cad}.
+A modelagem em CAD de todas as peças foi exportada em formato STL para fabricação por manufatura aditiva. Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de prototipagem rápida e baixo custo, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas caso o equipamento de impressão ofereça suporte a tais polímeros. A vista explodida da montagem, evidenciando o encaixe entre a cremalheira linear, o pinhão e o suporte do rodo motorizado, está ilustrada na Figura \ref{fig:vista_explodida}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.55\textwidth]{images/frame_cad.png}
-    \caption{Modelo tridimensional (CAD) do chassi estrutural (Frame) completo do ASCM no Autodesk Inventor.}
-    \label{fig:frame_cad}
-    \centerline{\small Fonte: Elaborado pelos autores.}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.55\textwidth]{images/cremalheira_cad.png}
-    \caption{Detalhe da cremalheira linear (Gear Rack) projetada em CAD.}
-    \label{fig:cremalheira_cad}
-    \centerline{\small Fonte: Elaborado pelos autores.}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.55\textwidth]{images/wiper_cad.png}
-    \caption{Modelo tridimensional do suporte do rodo motorizado (Wiper Support) e acoplamento do motor com o pinhão.}
-    \label{fig:wiper_cad}
+    \IfFileExists{images/vista_explodida.png}{%
+        \includegraphics[width=0.7\textwidth]{images/vista_explodida.png}%
+    }{%
+        \fbox{\parbox[c][6cm][c]{0.7\textwidth}{\centering\textit{Vista explodida da montagem (pendente)}}}%
+    }
+    \caption{Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (\textit{Gear-Rack}); (2) Pinhão (\textit{Gear}); (3) Suporte do Rodo (\textit{Wiper Support}); (4) Suporte de Aspersão (\textit{Sprinkler}); (5) Suporte dos Painéis (\textit{Panel Support}).}
+    \label{fig:vista_explodida}
     \centerline{\small Fonte: Elaborado pelos autores.}
 \end{figure}
 
