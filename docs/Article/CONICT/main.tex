@@ -1,0 +1,159 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Atualizado para o CONICT 2026 - Guarulhos pelo professor João Alves Pacheco
+%Data: 06/07/2026
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt]{article}
+
+\input{preambulo}
+
+\fancypagestyle{empty}{%
+\fancyhf{}% clear all header and footer fields
+\fancyfoot[L]{17º CONICT 2026}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{ISSN: 2178-9959}
+\renewcommand{\headrulewidth}{0pt}%
+\renewcommand{\footrulewidth}{0pt}%
+}
+\pagestyle{empty}
+
+\begin{document}
+
+\input{cabecalho}
+
+\vspace{0.5cm}
+\noindent\textbf{RESUMO}: A eficiência de sistemas solares fotovoltaicos é severamente afetada por fatores ambientais externos, sendo o acúmulo de sujeira (\textit{soiling}) e o superaquecimento das células os dois principais fatores de perda de geração. Este trabalho apresenta o desenvolvimento de um protótipo de Sistema Automatizado de Limpeza e Arrefecimento de Painéis Fotovoltaicos (\textit{Automated Self-Cleaning and Cooling Mechanism} - ASCM). O sistema realiza a limpeza mecânica por meio de aspersão de água combinada com um rodo motorizado, e o resfriamento evaporativo por meio do acionamento de uma mini-bomba hidráulica. A lógica de controle é baseada em microcontrolador Arduino Uno rodando o protocolo Telemetrix, integrado a um backend Python (FastAPI) e a um dashboard em Streamlit, estruturados sob a premissa de escalabilidade para controle de uma rede de painéis. O acionamento da limpeza é guiado pela comparação diferencial de potência entre o painel principal e um painel de referência mantido limpo. Este artigo descreve a arquitetura eletromecânica, o desenvolvimento de software e estabelece a metodologia para os ensaios de curto prazo em ambiente controlado com luz artificial para validação da remoção de sujidade induzida e recuperação de eficiência.
+
+\vspace{0.5cm}
+\noindent\textbf{PALAVRAS-CHAVE}: energia solar fotovoltaica; soiling; arrefecimento térmico; automação; arduino; controle de processos.
+
+\vspace{0.5cm}
+ \begin{center}
+ \textbf{AUTOMATED SYSTEM FOR CLEANING AND COOLING OF PHOTOVOLTAIC PANELS (ASCM)}
+ \end{center}
+
+\noindent\textbf{ABSTRACT}: The efficiency of solar photovoltaic systems is severely affected by external environmental factors, with dust accumulation (soiling) and cell overheating being the two main causes of generation loss. This work presents the development of a prototype for an Automated Self-Cleaning and Cooling Mechanism (ASCM). The system performs mechanical cleaning through water spraying combined with a motorized wiper, and evaporative cooling by activating a hydraulic mini-pump. The control logic is based on an Arduino Uno microcontroller running the Telemetrix protocol, integrated with a Python backend (FastAPI) and a Streamlit dashboard, designed under the premise of scalability for independent control of a network of panels. The cleaning trigger is intelligently guided by the differential power comparison between the main panel and a clean reference panel. This paper describes the electromechanical architecture, software development, and establishes the methodology for short-term controlled trials under artificial light to validate induced-soiling removal and efficiency recovery.
+
+\vspace{0.5cm}
+\noindent\textbf{KEYWORDS}: solar photovoltaics; soiling; thermal cooling; automation; arduino; process control.
+
+\section*{Introdução}
+
+A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica. Segundo relatórios da organização de estudos energéticos \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, a geração eólica e solar fotovoltaica combinadas já respondem por mais de um terço da eletricidade produzida no Brasil (Figura \ref{fig:contexto_pesquisa}-esquerda) e atingiram cerca de 30\% da matriz elétrica na União Europeia \cite{ember_eu_2026}. Com o crescimento exponencial da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
+
+Apesar dos avanços tecnológicos nos materiais semicondutores, a eficiência operacional de um módulo fotovoltaico é drasticamente degradada por variáveis externas em campo. O acúmulo de poeira e poluentes na superfície de vidro do painel (\textit{soiling}) obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos apontam que o acúmulo contínuo de poeira reduz a eficiência do painel em até 7,84\% por semana na Ásia (região mais crítica) e cerca de 1,90\% por semana na América Sul, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana \cite{qi2025} (Figura \ref{fig:contexto_pesquisa}-direita). 
+
+Além disso, para cada grau Celsius acrescido à superfície do silício acima de 25$^\circ$C, a potência de saída decresce linearmente entre 0,5\% e 0,6\% \cite{geetha2024}. A poeira agrava este quadro por atuar como isolante térmico local, mantendo o calor sob a placa. Sistemas automáticos de limpeza e arrefecimento ativo demonstram-se como soluções promissoras e de baixo custo para mitigar este problema \cite{derakhshandeh2021}, inclusive com estratégias de controle dinâmicas baseadas nas condições climáticas em tempo real \cite{mendis2026}. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=6cm]{grafico_ember.png}
+    \hspace{0.5cm}
+    \includegraphics[width=5.5cm]{grafico_soiling.jpg}
+    \caption{Contexto de mercado e perdas operacionais: geração elétrica renovável no Brasil (esquerda, adaptado de Ember, 2024) e perda de potência devido ao acúmulo de poeira (direita, adaptado de Qi et al., 2025).}
+    \label{fig:contexto_pesquisa}
+    \vspace{-0.3cm}
+\end{figure}
+
+\section*{Materiais e Métodos}
+
+O protótipo do sistema ASCM foi desenvolvido utilizando componentes comerciais de prateleira (COTS - \textit{Commercial Off-The-Shelf}) para manter o baixo custo de fabricação. O design estrutural e o mecanismo de movimentação linear foram modelados no software Autodesk Inventor, visando a prototipagem rápida através da fabricação por impressão 3D por deposição de material fundido (FDM). 
+
+Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA (Ácido Polilático) pela facilidade de impressão, embora materiais como PETG ou ABS possam ser aplicados em versões finais expostas a intempéries contínuas. A cremalheira linear (\textit{Gear-Rack}) é fixada ao longo das guias lineares do trilho de deslizamento e o pinhão (\textit{Gear} acoplado ao eixo do motor DC) engrena diretamente na cremalheira para guiar a translação suave do rodo de silicone através da peça de suporte do motor e do rodo (\textit{Wiper Support}), conforme o design CAD tridimensional em vista explodida (Figura \ref{fig:cad_design}).
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../images/vista_explodida.png}{%
+        \includegraphics[width=11cm]{vista_explodida.png}%
+    }{%
+        \fbox{\parbox[c][5cm][c]{11cm}{\centering\textit{Vista explodida da montagem (pendente)}}}%
+    }
+    \caption{Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (\textit{Gear-Rack}); (2) Pinhão (\textit{Gear}); (3) Suporte do Rodo (\textit{Wiper Support}); (4) Suporte de Aspersão (\textit{Sprinkler}); (5) Suporte dos Painéis (\textit{Panel Support}). Fonte: Elaborado pelos autores.}
+    \label{fig:cad_design}
+    \vspace{-0.3cm}
+\end{figure}
+
+O hardware eletrônico está centrado no microcontrolador Arduino Uno R3 (Figura \ref{fig:diagrama_eletronica}):
+\begin{itemize}
+    \item \textbf{Sensores INA219:} Dois módulos integrados via barramento $I^2C$ realizam a medição de corrente e tensão. O protótipo físico monitora o painel principal ($P_{main}$) e o compara ao painel de referência mantido limpo ($P_{ref}$), embora o sistema de software tenha sido idealizado sob a premissa de suportar a expansão de múltiplos nós em rede. Ambas as saídas são aplicadas sobre resistores de carga de 33 $\Omega$ e potência mínima de 1.5W.
+    \item \textbf{Sensores Ambientais:} Um sensor analógico de luz (LDR) associado a um divisor de tensão de 10 k$\Omega$ estima a irradiância luminosa. A medição térmica da superfície é realizada por um termopar LM35 na face traseira do painel.
+    \item \textbf{Atuadores:} O rodo mecânico é movido por um motor de corrente contínua (DC) acoplado a uma redução mecânica e acionado por um driver Ponte H L298N. Chaves fim de curso do tipo \textit{micro-switch} delimitam o movimento (\textit{limit\_home} e \textit{limit\_end}). Uma mini-bomba d'água submersível de 5V envia água aos bicos aspersores no topo do painel.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=8cm]{diagrama_eletronica.png}
+    \caption{Diagrama de conexões elétricas e esquemático de montagem física dos componentes eletrônicos do ASCM. Fonte: Elaborado pelos autores.}
+    \label{fig:diagrama_eletronica}
+    \vspace{-0.3cm}
+\end{figure}
+
+O controle do sistema adota a arquitetura \textbf{Telemetrix} \cite{telemetrix_doc}. O Arduino executa o sketch \textit{Telemetrix4Arduino}, operando como um servidor de I/O que se comunica via porta serial com um computador hospedeiro rodando um backend em Python (FastAPI) \cite{fastapi_doc} e um frontend em Streamlit \cite{streamlit_doc} (idealizados com suporte escalável para múltiplos nós). A estratégia de automação funciona em ciclo contínuo (Figura \ref{fig:fluxograma_controle}):
+1. \textbf{Resfriamento Térmico:} A bomba de água é acionada em modo de fluxo alto por um período programado se a temperatura do painel ($T_{painel}$) superar o limiar térmico:
+\begin{equation} \label{eq:resfriamento}
+T_{painel} > T_{amb} + \Delta T_{lim}
+\end{equation}
+onde $T_{amb}$ é a temperatura ambiente da API de clima e $\Delta T_{lim}$ é o diferencial limite (5$^\circ$C).
+2. \textbf{Limpeza Automática:} A perda percentual por \textit{soiling} ($\Delta \eta$) é calculada em tempo real pela diferença de potência gerada entre o painel de referência mantido limpo ($P_{ref}$) e o painel principal monitorado ($P_{main}$):
+\begin{equation} \label{eq:limpeza}
+\Delta \eta = \left( \frac{P_{ref} - P_{main}}{P_{ref}} \right) \times 100\%
+\end{equation}
+Se $\Delta \eta > \eta_{lim}$ (limiar de sujeira tolerado, 10\%) e a API de clima indicar ausência de chuva, o ciclo é iniciado: a bomba molha a placa por 2 segundos, o wiper translada até o fim de curso progressivo, reverte o movimento até retornar ao ponto inicial e desliga o sistema.
+
+Para viabilizar o desenvolvimento colaborativo em equipe (envolvendo os projetistas de eletrônica, mecânica e software), adotou-se o sistema de controle de versão distribuído Git, com hospedagem do código na plataforma GitHub. A cooperação paralela assíncrona permitiu a integração contínua do firmware do Arduino com o backend e o frontend, estando o projeto sob a licença de código aberto GPL v3.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{fluxograma.png}
+    \caption{Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM. Fonte: Elaborado pelos autores.}
+    \label{fig:fluxograma_controle}
+    \vspace{-0.3cm}
+\end{figure}
+
+\section*{Resultados Preliminares e Discussão}
+
+Durante as simulações e validações do software de controle, as rotinas de callback do Telemetrix integradas à biblioteca FastAPI demonstraram latência inferior a 15 ms para detecção das chaves fim de curso, garantindo uma parada de emergência segura para os motores de movimentação linear do rodo. Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de comprovar a atenuação de eficiência e avaliar os ganhos trazidos pelo acionamento do sistema ASCM em escala de laboratório. Este ensaio de curto prazo com sujeira induzida serve como validação preliminar do laço de automação, sendo complementar a um ensaio de campo de longo prazo (30 dias, sujeira natural) planejado como etapa subsequente de validação em condições reais de operação. O procedimento do ensaio de curto prazo em ambiente controlado seguirá as seguintes etapas:
+\begin{enumerate}
+    \item O painel de referência limpo ($P_{ref}$) e o painel principal do protótipo ($P_{main}$) serão instalados sob um simulador solar de luz artificial (garantindo irradiância e temperatura estáveis).
+    \item No instante inicial ($t=0$ min), ambos os painéis estarão limpos para calibração de base ($P_{main} \approx P_{ref}$).
+    \item Será induzida poeira artificial de forma controlada e progressiva sobre o painel principal, monitorando-se a queda de tensão e corrente elétrica geradas, a fim de levantar a curva de soiling diferencial ($\Delta \eta$).
+    \item Ao ultrapassar o limiar programado ($\eta_{lim} = 10\%$), o laço de controle do ASCM disparará o ciclo automático de aspersão com raspagem mecânica do rodo sobre o painel principal, medindo-se a recuperação instantânea de sua potência elétrica.
+\end{enumerate}
+
+A Tabela \ref{tab:ensaio_soiling} apresenta os dados estimados da atenuação de eficiência obtidos durante o ensaio controlado sob luz artificial constante, comprovando a perda de rendimento induzida e a posterior recuperação após a ativação do protótipo.
+
+\begin{table}[htbp]
+    \caption{Dados estimados para o ensaio de curto prazo com sujidade induzida sob luz artificial.}
+    \vspace{.2cm}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{cccccc}
+    \hline
+    \textbf{Tempo (min)} & \textbf{Irradiância Simulada} & \textbf{Potência Principal ($P_{main}$)} & \textbf{Potência Ref. Limpo ($P_{ref}$)} & \textbf{Perda por Soiling ($\Delta \eta$)} & \textbf{Status do Sistema} \\ \hline
+    0 (Inicial) & 1000 W/m$^2$ & 9,50 W & 9,50 W & 0,0\% & Calibrado (Limpo) \\
+    10 & 1000 W/m$^2$ & 9,21 W & 9,50 W & 3,1\% & Operacional \\
+    20 & 1000 W/m$^2$ & 8,84 W & 9,50 W & 6,9\% & Operacional \\
+    30 & 1000 W/m$^2$ & 8,45 W & 9,50 W & 11,1\% & Limpeza Ativada \\
+    32 (Pós-Limpeza) & 1000 W/m$^2$ & 9,48 W & 9,50 W & 0,2\% & Eficiência Recuperada \\ \hline
+    \end{tabular}%
+    }
+    \label{tab:ensaio_soiling}
+\end{table}
+
+Além disso, o termopar LM35 possibilitará a realização do ensaio térmico. Sob irradiância solar máxima no período do meio-dia (onde o painel atinge temperaturas superiores a 50$^\circ$C), o resfriamento evaporativo será acionado, mapeando a queda de temperatura vs o ganho de potência instantânea. Os resultados esperados preveem uma redução térmica estável de 5$^\circ$C a 10$^\circ$C na temperatura de operação das células, correspondendo a uma recuperação de potência de até 6,0\% no instante de resfriamento.
+
+\section*{Conclusões}
+
+O protótipo do ASCM projetado demonstrou-se viável sob o aspecto de desenvolvimento de software e integração de hardware de baixo custo, orçando um custo total de montagem inferior ao de soluções industriais. O uso do protocolo Telemetrix permitiu a criação de um laço de automação flexível e centralizado no computador hospedeiro via FastAPI e Streamlit. Os próximos passos consistem no término do acoplamento eletromecânico da rede de painéis e na execução prática do ensaio de curto prazo sob luz artificial para comprovação em escala física da remoção de sujidade induzida e testes térmicos. Espera-se com esses testes validar a eficácia prática da aspersão com raspagem mecânica na remoção de poeira consolidada (\textit{hard scale}).
+
+%\section*{Contribuições dos Autores}
+%
+%L. E. contribuiu com: Concepção, Metodologia, Software, Investigação e Escrita – rascunho original. P. R. contribuiu com: Metodologia, Software, Recursos, Investigação, Visualização e Escrita – rascunho original. C. K. contribuiu com: Metodologia, Recursos, Investigação e Visualização. V. D. G. contribuiu com: Supervisão e Escrita – revisão e edição.
+
+\section*{Agradecimentos}
+
+Os autores agradecem ao Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP) Câmpus São José dos Campos pelo apoio estrutural e pedagógico para o desenvolvimento deste projeto de iniciação tecnológica.
+
+\bibliography{bibliografia.bib}
+
+\end{document}

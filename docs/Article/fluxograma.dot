@@ -1,0 +1,53 @@
+digraph G {
+    rankdir=LR
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif" fontsize=10]
+    edge [fontname="Helvetica,Arial,sans-serif" fontsize=9]
+
+    // Estilos de Nós
+    node [shape=box, style="filled,rounded", color="#1d3557", fillcolor="#e2eafc", penwidth=1.5]
+    start [label="Início\n(Laço de Automação)", shape=ellipse, fillcolor="#d8f3dc", color="#2d6a4f"]
+    read_sensors [label="Leitura dos Sensores\n(LM35, INA219, LDR, API Clima)"]
+    log_csv [label="Registrar Telemetria\n(Arquivo CSV)"]
+    
+    // Decisão de Temperatura
+    dec_temp [label="Temperatura do Painel >\nTemp. Ambiente + Delta?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    cool_on [label="Ligar Arrefecimento\n(Bomba ON)"]
+    cool_off [label="Desligar Arrefecimento\n(Bomba OFF)"]
+
+    // Decisão de Sujeira
+    dec_soil [label="Perda por Soiling >\nLimiar de Sujeira?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    dec_rain [label="Está Chovendo?", shape=diamond, fillcolor="#fee4e2", color="#b91c1c"]
+    clean_cycle [label="Ciclo de Limpeza\n(Aspersão e Rodo)"]
+    
+    wait_state [label="Aguardar 60 segundos", shape=ellipse, fillcolor="#f1f5f9", color="#64748b"]
+
+    // Alinhamento de colunas (Ranks)
+    { rank=same; start; wait_state; }
+    { rank=same; read_sensors; clean_cycle; }
+    { rank=same; log_csv; dec_rain; }
+    { rank=same; dec_temp; dec_soil; }
+
+    // Conexões - Linha Superior (Fluxo Esquerda -> Direita)
+    start -> read_sensors;
+    read_sensors -> log_csv;
+    log_csv -> dec_temp;
+    dec_temp -> cool_on [label="Sim"];
+    dec_temp -> cool_off [label="Não"];
+    
+    // Conexão entre Linhas (Fluxo Direita -> Descendente)
+    cool_on -> dec_soil;
+    cool_off -> dec_soil;
+    
+    // Conexões - Linha Inferior (Fluxo Direita -> Esquerda, usando dir=back)
+    dec_rain -> dec_soil [dir=back, label="Sim"];
+    clean_cycle -> dec_rain [dir=back, label="Não"];
+    wait_state -> clean_cycle [dir=back];
+    
+    // Desvios adicionais para a espera
+    wait_state -> dec_soil [dir=back, label="Não"];
+    wait_state -> dec_rain [dir=back, label="Sim (Evita desperdício)"];
+    
+    // Loop de retorno para o início (Fluxo Esquerda -> Ascendente)
+    read_sensors -> wait_state [dir=back];
+}
