@@ -39,18 +39,52 @@
 
 \section*{Introdução}
 
-A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica. Segundo relatórios da organização de estudos energéticos \textit{Ember} \cite{ember_brazil_2024, ember_eu_2026}, a geração eólica e solar fotovoltaica combinadas já respondem por mais de um terço da eletricidade produzida no Brasil (Figura \ref{fig:contexto_pesquisa}-esquerda) e atingiram cerca de 30\% da matriz elétrica na União Europeia \cite{ember_eu_2026}. Com o crescimento exponencial da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
+A transição energética global em direção a fontes renováveis tem posicionado a energia solar fotovoltaica como um dos pilares fundamentais da matriz elétrica. No Brasil, segundo as séries anuais do Balanço Energético Nacional (BEN), a participação da solar fotovoltaica na geração elétrica passou de 7,2\% em 2023 para 11,4\% em 2025 (88,1 TWh) e, somada à eólica, de 20,7\% para 26,4\% \cite{epe_ben2025, epe_ben2026} (Figura \ref{fig:contexto_pesquisa}-esquerda), uma tendência anual consistente. Valores acima de um terço da geração \cite{ember_brazil_2024} referem-se a meses isolados de pico sazonal, e não à média anual. Com a rápida expansão da capacidade instalada, torna-se crítico assegurar que esses ativos operem com o máximo aproveitamento energético possível.
 
-Apesar dos avanços tecnológicos nos materiais semicondutores, a eficiência operacional de um módulo fotovoltaico é drasticamente degradada por variáveis externas em campo. O acúmulo de poeira e poluentes na superfície de vidro do painel (\textit{soiling}) obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos apontam que o acúmulo contínuo de poeira reduz a eficiência do painel em até 7,84\% por semana na Ásia (região mais crítica) e cerca de 1,90\% por semana na América Sul, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana \cite{qi2025} (Figura \ref{fig:contexto_pesquisa}-direita). 
+A eficiência operacional de um módulo fotovoltaico, contudo, é drasticamente degradada por variáveis externas em campo. O acúmulo de poeira e poluentes na superfície de vidro do painel (\textit{soiling}) obstrui a radiação solar direta que penetra nas junções p-n, diminuindo a corrente gerada. Estudos compilados por Qi et al. \cite{qi2025} reportam perdas de até 7,84\% por semana na Ásia e de cerca de 1,90\% por semana na América do Sul, podendo ultrapassar 50\% de perda total em períodos de seca prolongada sem intervenção humana. Esses valores provêm de experimentos distintos, com diferentes períodos de exposição, inclinações e métricas de perda, e não são diretamente comparáveis; ainda assim, a diferença é coerente com a maior concentração de particulado e a menor frequência de chuvas (limpeza natural) em regiões áridas, e com a umidade e o orvalho, que cimentam a poeira no vidro (\textit{dust scaling}) \cite{qi2025}.
+
+A perda também varia ao longo do dia (Figura \ref{fig:contexto_pesquisa}-direita), entre cerca de 25\% e 45\%, devido (i) à irradiância e ao ângulo de incidência, já que sob incidência oblíqua a luz atravessa uma camada de poeira mais espessa, aumentando o espalhamento; (ii) à diferença de temperatura entre os painéis limpo e sujo; e (iii) à nebulosidade transitória e à incerteza de medições pontuais. Por isso, o sistema mede a perda de forma diferencial em relação a um painel de referência (Equação \ref{eq:limpeza}), compensando as variações comuns a ambos.
 
 Além disso, para cada grau Celsius acrescido à superfície do silício acima de 25$^\circ$C, a potência de saída decresce linearmente entre 0,5\% e 0,6\% \cite{geetha2024}. A poeira agrava este quadro por atuar como isolante térmico local, mantendo o calor sob a placa. Sistemas automáticos de limpeza e arrefecimento ativo demonstram-se como soluções promissoras e de baixo custo para mitigar este problema \cite{derakhshandeh2021}, inclusive com estratégias de controle dinâmicas baseadas nas condições climáticas em tempo real \cite{mendis2026}. 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=6cm]{grafico_ember.png}
-    \hspace{0.5cm}
-    \includegraphics[width=5.5cm]{grafico_soiling.jpg}
-    \caption{Contexto de mercado e perdas operacionais: geração elétrica renovável no Brasil (esquerda, adaptado de Ember, 2024) e perda de potência devido ao acúmulo de poeira (direita, adaptado de Qi et al., 2025).}
+    \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        ybar stacked,
+        width=\linewidth, height=5.4cm,
+        bar width=0.9cm,
+        enlarge x limits=0.25,
+        ymin=0, ymax=32,
+        symbolic x coords={2023,2024,2025},
+        xtick=data,
+        ylabel={Participação na geração (\%)},
+        ylabel style={font=\small},
+        tick label style={font=\small},
+        legend style={at={(0.5,-0.15)}, anchor=north, legend columns=-1, font=\small, draw=none},
+        ymajorgrids, grid style={dotted, gray!60},
+        nodes near coords, nodes near coords style={font=\footnotesize},
+        nodes near coords={\pgfmathprintnumber[fixed, zerofill, precision=1, use comma]{\pgfplotspointmeta}},
+        every node near coord/.append style={yshift=-7pt},
+    ]
+    \addplot[fill=orange!80!black, draw=black, nodes near coords style={white}] coordinates {(2023,7.2) (2024,9.4) (2025,11.4)};
+    \addplot[fill=gray!35, draw=black] coordinates {(2023,13.5) (2024,14.3) (2025,15.0)};
+    \node[font=\small\bfseries] at (axis cs:2023,22.5) {20,7};
+    \node[font=\small\bfseries] at (axis cs:2024,25.5) {23,7};
+    \node[font=\small\bfseries] at (axis cs:2025,28.2) {26,4};
+    \legend{Solar fotovoltaica, Eólica}
+    \end{axis}
+    \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.92\linewidth]{grafico_soiling.jpg}
+    \vspace{0.1cm}
+    \end{minipage}
+    \caption{Participação anual da solar fotovoltaica e da eólica na geração elétrica brasileira (esquerda, elaborado a partir de EPE, 2025 e 2026) e potência de painéis limpo e sujo ao longo do dia (direita, adaptado de Qi et al., 2025).}
     \label{fig:contexto_pesquisa}
     \vspace{-0.3cm}
 \end{figure}
@@ -63,48 +97,47 @@ Para a confecção do protótipo físico de teste, utilizou-se filamento de PLA 
 
 \begin{figure}[htbp]
     \centering
+    \begin{minipage}[b]{0.48\textwidth}
+    \centering
     \IfFileExists{../images/vista_explodida.png}{%
-        \includegraphics[width=11cm]{vista_explodida.png}%
+        \includegraphics[width=\linewidth]{vista_explodida.png}%
     }{%
-        \fbox{\parbox[c][5cm][c]{11cm}{\centering\textit{Vista explodida da montagem (pendente)}}}%
+        \fbox{\parbox[c][4cm][c]{0.95\linewidth}{\centering\textit{Vista explodida da montagem (pendente)}}}%
     }
     \caption{Vista explodida da montagem do mecanismo de translação do ASCM: (1) Cremalheira (\textit{Gear-Rack}); (2) Pinhão (\textit{Gear}); (3) Suporte do Rodo (\textit{Wiper Support}); (4) Suporte de Aspersão (\textit{Sprinkler}); (5) Suporte dos Painéis (\textit{Panel Support}). Fonte: Elaborado pelos autores.}
     \label{fig:cad_design}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.85\linewidth]{diagrama_eletronica.png}
+    \caption{Diagrama de conexões elétricas e esquemático de montagem física dos componentes eletrônicos do ASCM. Fonte: Elaborado pelos autores.}
+    \label{fig:diagrama_eletronica}
+    \end{minipage}
     \vspace{-0.3cm}
 \end{figure}
 
 O hardware eletrônico está centrado no microcontrolador Arduino Uno R3 (Figura \ref{fig:diagrama_eletronica}):
-\begin{itemize}
+\begin{itemize}\setlength{\itemsep}{0pt}
     \item \textbf{Sensores INA219:} Dois módulos integrados via barramento $I^2C$ realizam a medição de corrente e tensão. O protótipo físico monitora o painel principal ($P_{main}$) e o compara ao painel de referência mantido limpo ($P_{ref}$), embora o sistema de software tenha sido idealizado sob a premissa de suportar a expansão de múltiplos nós em rede. Ambas as saídas são aplicadas sobre resistores de carga de 33 $\Omega$ e potência mínima de 1.5W.
     \item \textbf{Sensores Ambientais:} Um sensor analógico de luz (LDR) associado a um divisor de tensão de 10 k$\Omega$ estima a irradiância luminosa. A medição térmica da superfície é realizada por um termopar LM35 na face traseira do painel.
     \item \textbf{Atuadores:} O rodo mecânico é movido por um motor de corrente contínua (DC) acoplado a uma redução mecânica e acionado por um driver Ponte H L298N. Chaves fim de curso do tipo \textit{micro-switch} delimitam o movimento (\textit{limit\_home} e \textit{limit\_end}). Uma mini-bomba d'água submersível de 5V envia água aos bicos aspersores no topo do painel.
 \end{itemize}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=8cm]{diagrama_eletronica.png}
-    \caption{Diagrama de conexões elétricas e esquemático de montagem física dos componentes eletrônicos do ASCM. Fonte: Elaborado pelos autores.}
-    \label{fig:diagrama_eletronica}
-    \vspace{-0.3cm}
-\end{figure}
 
 O controle do sistema adota a arquitetura \textbf{Telemetrix} \cite{telemetrix_doc}. O Arduino executa o sketch \textit{Telemetrix4Arduino}, operando como um servidor de I/O que se comunica via porta serial com um computador hospedeiro rodando um backend em Python (FastAPI) \cite{fastapi_doc} e um frontend em Streamlit \cite{streamlit_doc} (idealizados com suporte escalável para múltiplos nós). A estratégia de automação funciona em ciclo contínuo (Figura \ref{fig:fluxograma_controle}):
-1. \textbf{Resfriamento Térmico:} A bomba de água é acionada em modo de fluxo alto por um período programado se a temperatura do painel ($T_{painel}$) superar o limiar térmico:
-\begin{equation} \label{eq:resfriamento}
-T_{painel} > T_{amb} + \Delta T_{lim}
-\end{equation}
-onde $T_{amb}$ é a temperatura ambiente da API de clima e $\Delta T_{lim}$ é o diferencial limite (5$^\circ$C).
+1. \textbf{Resfriamento Térmico:} A bomba de água é acionada em modo de fluxo alto por um período programado se a temperatura do painel ($T_{painel}$) superar o limiar térmico, isto é, se $T_{painel} > T_{amb} + \Delta T_{lim}$, onde $T_{amb}$ é a temperatura ambiente da API de clima e $\Delta T_{lim}$ é o diferencial limite (5$^\circ$C).
 2. \textbf{Limpeza Automática:} A perda percentual por \textit{soiling} ($\Delta \eta$) é calculada em tempo real pela diferença de potência gerada entre o painel de referência mantido limpo ($P_{ref}$) e o painel principal monitorado ($P_{main}$):
 \begin{equation} \label{eq:limpeza}
 \Delta \eta = \left( \frac{P_{ref} - P_{main}}{P_{ref}} \right) \times 100\%
 \end{equation}
 Se $\Delta \eta > \eta_{lim}$ (limiar de sujeira tolerado, 10\%) e a API de clima indicar ausência de chuva, o ciclo é iniciado: a bomba molha a placa por 2 segundos, o wiper translada até o fim de curso progressivo, reverte o movimento até retornar ao ponto inicial e desliga o sistema.
 
-Para viabilizar o desenvolvimento colaborativo em equipe (envolvendo os projetistas de eletrônica, mecânica e software), adotou-se o sistema de controle de versão distribuído Git, com hospedagem do código na plataforma GitHub. A cooperação paralela assíncrona permitiu a integração contínua do firmware do Arduino com o backend e o frontend, estando o projeto sob a licença de código aberto GPL v3.
+O desenvolvimento colaborativo entre as frentes de eletrônica, mecânica e software foi gerenciado com Git e GitHub, permitindo a integração contínua do firmware com o backend e o frontend; o projeto está sob a licença de código aberto GPL v3.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\linewidth]{fluxograma.png}
+    \includegraphics[width=0.85\linewidth]{fluxograma.png}
     \caption{Fluxograma do laço de controle de automação e de tomada de decisão do sistema ASCM. Fonte: Elaborado pelos autores.}
     \label{fig:fluxograma_controle}
     \vspace{-0.3cm}
@@ -113,12 +146,19 @@ Para viabilizar o desenvolvimento colaborativo em equipe (envolvendo os projetis
 \section*{Resultados Preliminares e Discussão}
 
 Durante as simulações e validações do software de controle, as rotinas de callback do Telemetrix integradas à biblioteca FastAPI demonstraram latência inferior a 15 ms para detecção das chaves fim de curso, garantindo uma parada de emergência segura para os motores de movimentação linear do rodo. Com a montagem do protótipo físico completo em andamento, será conduzido um ensaio experimental com o objetivo de comprovar a atenuação de eficiência e avaliar os ganhos trazidos pelo acionamento do sistema ASCM em escala de laboratório. Este ensaio de curto prazo com sujeira induzida serve como validação preliminar do laço de automação, sendo complementar a um ensaio de campo de longo prazo (30 dias, sujeira natural) planejado como etapa subsequente de validação em condições reais de operação. O procedimento do ensaio de curto prazo em ambiente controlado seguirá as seguintes etapas:
-\begin{enumerate}
+\begin{enumerate}\setlength{\itemsep}{0pt}
     \item O painel de referência limpo ($P_{ref}$) e o painel principal do protótipo ($P_{main}$) serão instalados sob um simulador solar de luz artificial (garantindo irradiância e temperatura estáveis).
     \item No instante inicial ($t=0$ min), ambos os painéis estarão limpos para calibração de base ($P_{main} \approx P_{ref}$).
     \item Será induzida poeira artificial de forma controlada e progressiva sobre o painel principal, monitorando-se a queda de tensão e corrente elétrica geradas, a fim de levantar a curva de soiling diferencial ($\Delta \eta$).
     \item Ao ultrapassar o limiar programado ($\eta_{lim} = 10\%$), o laço de controle do ASCM disparará o ciclo automático de aspersão com raspagem mecânica do rodo sobre o painel principal, medindo-se a recuperação instantânea de sua potência elétrica.
+    \item Durante o ciclo, será registrada a corrente drenada da fonte de 5 V pela bomba e pelo motor, para o cálculo da energia consumida e do ganho energético líquido.
 \end{enumerate}
+
+Como os atuadores consomem energia, o benefício da limpeza é avaliado pelo ganho energético líquido:
+\begin{equation} \label{eq:ganho_liquido}
+E_{liq} = \int_{t_0}^{t_1} \left( P_{main}^{pós} - P_{main}^{pré} \right) dt - E_{ciclo}, \qquad E_{ciclo} = V_s \left( \bar{I}_b \, t_b + \bar{I}_m \, t_m \right)
+\end{equation}
+em que $[t_0, t_1]$ é o intervalo até o próximo ciclo, $V_s = 5$ V, e $\bar{I}_b$, $\bar{I}_m$, $t_b$ e $t_m$ são as correntes médias e os tempos de acionamento da bomba e do motor. No ciclo implementado, a bomba opera durante toda a limpeza (2 s de pré-umedecimento, avanço, 1 s de pausa e retorno) e cada curso do rodo é limitado por software a 30 s, logo $t_b \leq 63$ s e $t_m \leq 60$ s. Com valores nominais típicos (bomba $\approx$ 1 W; motorredutor $\approx$ 1,5 W), obtém-se o limite superior $E_{ciclo} \approx 153$ J ($\approx$ 0,04 Wh), compensado em cerca de 2,5 min pela recuperação de $\approx$ 1 W prevista na Tabela \ref{tab:ensaio_soiling}. Esses valores serão substituídos pelas correntes medidas, e o balanço será aplicado também ao arrefecimento e, em escala, ao consumo do Arduino e do computador hospedeiro.
 
 A Tabela \ref{tab:ensaio_soiling} apresenta os dados estimados da atenuação de eficiência obtidos durante o ensaio controlado sob luz artificial constante, comprovando a perda de rendimento induzida e a posterior recuperação após a ativação do protótipo.
 
