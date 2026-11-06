@@ -20,7 +20,9 @@ jobs:
         cache-dependency-path: "firmware/dashboard/uv.lock"
 
     - name: Set up Python
-      run: uv python install
+      run: |
+        cd firmware/dashboard
+        uv python install
 
     - name: Install dependencies
       run: |

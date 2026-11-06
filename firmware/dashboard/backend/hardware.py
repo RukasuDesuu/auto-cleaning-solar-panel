@@ -107,20 +107,24 @@ class HardwareManager:
             self.board.digital_write(self.PUMP_IN3, 1)
             self.board.digital_write(self.PUMP_IN4, 0)
             self.board.analog_write(self.PUMP_ENB, speed)
+            self.state["pump"] = flow_level
         else:
             self.board.digital_write(self.PUMP_IN3, 0)
             self.board.digital_write(self.PUMP_IN4, 0)
             self.board.analog_write(self.PUMP_ENB, 0)
+            self.state["pump"] = "off"
 
     def move_wiper(self, direction: str, speed: int = 200):
         if direction == "forward" and self.state["limit_end"] == 1:
             self.board.digital_write(self.MOTOR_IN1, 1)
             self.board.digital_write(self.MOTOR_IN2, 0)
             self.board.analog_write(self.MOTOR_ENA, speed)
+            self.state["wiper"] = direction
         elif direction == "backward" and self.state["limit_home"] == 1:
             self.board.digital_write(self.MOTOR_IN1, 0)
             self.board.digital_write(self.MOTOR_IN2, 1)
             self.board.analog_write(self.MOTOR_ENA, speed)
+            self.state["wiper"] = direction
         else:
             self.stop_wiper()
 
@@ -128,6 +132,7 @@ class HardwareManager:
         self.board.digital_write(self.MOTOR_IN1, 0)
         self.board.digital_write(self.MOTOR_IN2, 0)
         self.board.analog_write(self.MOTOR_ENA, 0)
+        self.state["wiper"] = "stopped"
 
     def _read_ina219(self, address):
         """Lê dados de potência do INA219 via I2C"""
