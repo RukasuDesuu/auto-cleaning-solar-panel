@@ -44,3 +44,34 @@ def test_sensor_state_update(hardware_manager):
     # (raw_val * 5.0 / 1023.0) * 100 -> (512 * 5 / 1023) * 100 ~= 250
     hardware_manager._temp_cb([1, 1, 512, 0])
     assert hardware_manager.get_all_sensors()["temperature"] > 0
+
+
+def test_pump_state_is_tracked(hardware_manager):
+    hardware_manager.set_pump("high")
+    assert hardware_manager.get_all_sensors()["pump"] == "high"
+
+    hardware_manager.set_pump("low")
+    assert hardware_manager.get_all_sensors()["pump"] == "low"
+
+    hardware_manager.set_pump("off")
+    assert hardware_manager.get_all_sensors()["pump"] == "off"
+
+
+def test_wiper_state_is_tracked(hardware_manager):
+    # Fins de curso soltos: o rodo pode se mover
+    hardware_manager._limit_end_cb([2, 3, 1, 0])
+    hardware_manager._limit_home_cb([2, 2, 1, 0])
+
+    hardware_manager.move_wiper("forward", 150)
+    assert hardware_manager.get_all_sensors()["wiper"] == "forward"
+
+    hardware_manager.move_wiper("backward", 150)
+    assert hardware_manager.get_all_sensors()["wiper"] == "backward"
+
+    hardware_manager.stop_wiper()
+    assert hardware_manager.get_all_sensors()["wiper"] == "stopped"
+
+    # Ao atingir o fim de curso, o movimento para e o estado reflete isso
+    hardware_manager._limit_end_cb([2, 3, 0, 0])
+    hardware_manager.move_wiper("forward", 150)
+    assert hardware_manager.get_all_sensors()["wiper"] == "stopped"

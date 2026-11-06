@@ -6,6 +6,8 @@ from contextlib import asynccontextmanager
 import uvicorn
 import asyncio
 import time
+import os
+import csv
 
 
 @asynccontextmanager
@@ -43,9 +45,54 @@ config = {
 }
 
 
+def _as_float(value, default: float = 0.0) -> float:
+    """Converte um campo do CSV para float, tolerando valores vazios ou invalidos"""
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _as_int(value, default: int = 0) -> int:
+    """Converte um campo do CSV para int, tolerando valores vazios ou invalidos"""
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
+
+
 @app.get("/telemetry")
 async def get_telemetry():
     return hw.get_all_sensors()
+
+
+@app.get("/history/telemetry")
+async def get_telemetry_history(limit: int = 50):
+    """Retorna as ultimas leituras de telemetria gravadas no arquivo CSV"""
+    if not os.path.exists(logger.telemetry_file):
+        return []
+
+    history = []
+    try:
+        with open(logger.telemetry_file, "r", newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                history.append(
+                    {
+                        "timestamp": row.get("timestamp", ""),
+                        "p_main_w": _as_float(row.get("p_main_w")),
+                        "p_ref_w": _as_float(row.get("p_ref_w")),
+                        "temp_c": _as_float(row.get("temp_c")),
+                        "lux": _as_float(row.get("lux")),
+                        "limit_home": _as_int(row.get("limit_home"), 1),
+                        "limit_end": _as_int(row.get("limit_end"), 1),
+                    }
+                )
+    except Exception as e:
+        logger.log_event("ERROR", f"Erro ao ler historico de telemetria: {str(e)}")
+        return []
+
+    return history[-limit:] if limit > 0 else history
 
 
 @app.get("/weather")
@@ -208,18 +255,6 @@ def run_full_clean_cycle():
         logger.log_event("CLEAN_ERROR", f"Erro durante ciclo de limpeza: {str(e)}")
     finally:
         hw.state["cleaning_active"] = False
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-    try:
-        hw.stop_wiper()
-        hw.set_pump("off")
-        logger.log_event("CLEAN_DONE", "Ciclo de limpeza finalizado com sucesso")
-    except Exception as e:
-        hw.stop_wiper()
-        hw.set_pump("off")
-        logger.log_event("CLEAN_ERROR", f"Erro durante ciclo de limpeza: {str(e)}")
 
 
 if __name__ == "__main__":
